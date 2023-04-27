@@ -1,6 +1,10 @@
 import { createContext } from "react";
 
-export const AccountContext = createContext({
+const AccountContext = createContext({
     loggedIn: false,
-    userName: null
+    setLoggedIn: (input) => {},
+    username: '',
+    setUsername: (input) => {}
 })
+
+export default AccountContext

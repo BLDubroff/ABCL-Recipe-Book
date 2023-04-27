@@ -1,12 +1,14 @@
 import './Navbar.css'
+import AccountButton from './AccountButton'
+import HomeButton from './HomeButton'
 
 function Navbar() {
 
     return (
         <div id="navbar">
-            <h1>ABCL Recipe Book</h1>
+            <HomeButton />
             <h2>Search Bar</h2>
-            <h2>Login/Signup</h2>
+            <AccountButton />
         </div>
     )
 
