@@ -76,12 +76,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     avg_rating:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     }
   }, {
     sequelize,
     modelName: 'Recipe_data',
-    tableName: 'recipe_data',
+    tableName: 'Recipe_data',
     timestamps: false
   });
   return Recipe_data;

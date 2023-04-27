@@ -1,17 +1,17 @@
 // DEPENDENCIES
 const reviews = require('express').Router()
 const db = require('../models')
-const { Review } = db 
+const { Rating_reviews } = db 
 const { Op } = require('sequelize')
 
 // FIND ALL REVIEWS
 reviews.get('/', async (req, res) => {
     try {
-        const foundReviews = await Review.findAll({
+        const foundReviews = await Rating_reviews.findAll({
             order: [ [ 'rating_reviews_id', 'ASC'] ],
-            where: {
-                name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
-            }
+            // where: {
+            //     name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
+            // }
         })
         res.status(200).json(foundReviews)
     } catch (error) {
@@ -22,7 +22,7 @@ reviews.get('/', async (req, res) => {
 // FIND A SPECIFIC REVIEW
 reviews.get('/:id', async (req, res) => {
     try {
-        const foundReview = await Review.findOne({
+        const foundReview = await Rating_reviews.findOne({
             where: { rating_reviews_id: req.params.id }
         })
         res.status(200).json(foundReview)
@@ -34,7 +34,7 @@ reviews.get('/:id', async (req, res) => {
 // CREATE A REVIEW
 reviews.post('/', async (req, res) => {
     try {
-        const newReview = await Review.create(req.body)
+        const newReview = await Rating_reviews.create(req.body)
         res.status(200).json({
             message: 'Successfully inserted a new review',
             data: newReview
@@ -47,7 +47,7 @@ reviews.post('/', async (req, res) => {
 // UPDATE A REVIEW
 reviews.put('/:id', async (req, res) => {
     try {
-        const updatedReview = await Review.update(req.body, {
+        const updatedReview = await Rating_reviews.update(req.body, {
             where: {
                 rating_reviews_id: req.params.id
             }
@@ -63,7 +63,7 @@ reviews.put('/:id', async (req, res) => {
 // DELETE A REVIEW
 reviews.delete('/:id', async (req, res) => {
     try {
-        const deletedReview = await Review.destroy({
+        const deletedReview = await Rating_reviews.destroy({
             where: {
                 rating_reviews_id: req.params.id
             }

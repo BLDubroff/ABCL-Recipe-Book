@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     rating_reviews_id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     recipe_id:{
       type: DataTypes.INTEGER,
@@ -37,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Rating_reviews',
-    tableName: 'rating_reviews',
+    tableName: 'Rating_reviews',
     timestamps: false
   });
   return Rating_reviews;
