@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import AccountContext from "../Features/AccountContext";
+import { useContext, useEffect } from "react";
+import AccountContext from "../../Features/AccountContext";
 import UserProfile from "./UserProfile";
 import LoginButton from "./LoginButton";
 
 function AccountButton() {
 
-    const {loggedIn} = useContext(AccountContext);
+    const {loggedIn, username} = useContext(AccountContext);
 
     return (
         <>
             {loggedIn ?
-                UserProfile() :
+                UserProfile({username}) :
                 LoginButton()
             }
         </>

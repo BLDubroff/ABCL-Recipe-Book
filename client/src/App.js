@@ -3,6 +3,8 @@ import Navbar from './Components/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AccountContext from './Features/AccountContext';
 import { useState } from 'react';
+import LoginForm from './Components/LoginForm';
+import ProfilePage from './Components/ProfilePage';
 
 function App() {
 
@@ -27,7 +29,11 @@ function App() {
           } />
           
           <Route path='/login' element={
-            <h1>Log in form</h1>
+            <LoginForm />
+          } />
+
+          <Route path='/profile' element={
+            <ProfilePage />
           } />
           
         </Routes>
