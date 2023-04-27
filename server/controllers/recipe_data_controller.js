@@ -53,7 +53,7 @@ recipes.put('/:id', async (req, res) => {
             }
         })
         res.status(200).json({
-            message: `Successfully updated ${updatedRecipe} band(s)`
+            message: `Successfully updated ${updatedRecipe} recipe(s)`
         })
     } catch(err) {
         res.status(500).json(err)
