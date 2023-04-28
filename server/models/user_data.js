@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     user_id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     username:{
       type: DataTypes.TEXT,
@@ -29,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User_data',
-    tableName: 'user_data',
+    tableName: 'User_data',
     timestamps: false
   });
   return User_data;

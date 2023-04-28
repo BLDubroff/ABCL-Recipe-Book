@@ -1,17 +1,17 @@
 // DEPENDENCIES
 const user = require('express').Router()
 const db = require('../models')
-const { UserData } = db 
+const { User_data } = db 
 const { Op } = require('sequelize')
 
 // FIND ALL USERS
 user.get('/', async (req, res) => {
     try {
-        const foundUsers = await UserData.findAll({
+        const foundUsers = await User_data.findAll({
             order: [ [ 'user_id', 'ASC'] ],
-            where: {
-                name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
-            }
+            // where: {
+            //     username: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
+            // }
         })
         res.status(200).json(foundUsers)
     } catch (error) {
@@ -22,7 +22,7 @@ user.get('/', async (req, res) => {
 // FIND A SPECIFIC USER
 user.get('/:id', async (req, res) => {
     try {
-        const foundUser = await UserData.findOne({
+        const foundUser = await User_data.findOne({
             where: { recipe_id: req.params.id }
         })
         res.status(200).json(foundUser)
@@ -34,7 +34,7 @@ user.get('/:id', async (req, res) => {
 // CREATE A USER
 user.post('/', async (req, res) => {
     try {
-        const newUser = await UserData.create(req.body)
+        const newUser = await User_data.create(req.body)
         res.status(200).json({
             message: 'Successfully inserted a new user',
             data: newUser
@@ -47,7 +47,7 @@ user.post('/', async (req, res) => {
 // UPDATE A USER
 user.put('/:id', async (req, res) => {
     try {
-        const updatedUser = await UserData.update(req.body, {
+        const updatedUser = await User_data.update(req.body, {
             where: {
                 user_id: req.params.id
             }
@@ -63,7 +63,7 @@ user.put('/:id', async (req, res) => {
 // DELETE A USER
 user.delete('/:id', async (req, res) => {
     try {
-        const deletedUser = await UserData.destroy({
+        const deletedUser = await User_data.destroy({
             where: {
                 user_id: req.params.id
             }
