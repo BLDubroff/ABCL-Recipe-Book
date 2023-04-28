@@ -9,6 +9,7 @@ function LoginForm() {
     const {setLoggedIn, setUsername} = useContext(AccountContext)
 
     const username = useRef('')
+    const password = useRef('')
 
     const handleSubmit = (e, username) => {
         e.preventDefault();
@@ -19,7 +20,10 @@ function LoginForm() {
 
     return (
         <form>
-            <input ref={username} type="text" />
+            <label htmlFor="username">Username: </label>
+            <input ref={username} id="username" name="username" type="text" />
+            <label htmlFor="password">Password</label>
+            <input ref={password} id="password" name="password" type="text" />
             <button onClick={(e) => handleSubmit(e, username.current.value)}>Log in</button>
         </form>
     )
