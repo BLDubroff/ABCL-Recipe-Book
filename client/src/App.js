@@ -3,8 +3,8 @@ import Navbar from './Components/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AccountContext from './Features/AccountContext';
 import { useState } from 'react';
-import LoginForm from './Components/LoginForm';
 import ProfilePage from './Components/ProfilePage';
+import LoginSignupPage from './Components/LoginSignupPage';
 
 function App() {
 
@@ -29,7 +29,7 @@ function App() {
           } />
           
           <Route path='/login' element={
-            <LoginForm />
+            <LoginSignupPage />
           } />
 
           <Route path='/profile' element={
