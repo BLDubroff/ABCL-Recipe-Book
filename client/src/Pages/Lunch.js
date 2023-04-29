@@ -1,3 +1,7 @@
-export const Lunch = () => {
-    return <div>Lunch Recipes</div>
-  };
+import React from 'react'
+
+export default function Lunch() {
+  return (
+    <div>Lunch</div>
+  )
+}

@@ -5,6 +5,7 @@ import AccountContext from './Features/AccountContext';
 import { useState } from 'react';
 import ProfilePage from './Components/ProfilePage';
 import LoginSignupPage from './Components/LoginSignupPage';
+import RecipesType from './Pages/RecipesType';
 
 function App() {
 
@@ -36,6 +37,10 @@ function App() {
             <ProfilePage />
           } />
           
+          <Route path='/Recipes' element={
+            <RecipesType />
+          } />
+
         </Routes>
       </ BrowserRouter>
     </ AccountContext.Provider>

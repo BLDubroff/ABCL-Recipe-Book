@@ -1,3 +1,7 @@
-    export const Home = () => {
-    return <div>Welcome to ABCL Recipe Book</div>
-  };
+import React from 'react'
+
+export default function Home() {
+  return (
+    <div>Home</div>
+  )
+}
