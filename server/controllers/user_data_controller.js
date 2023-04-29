@@ -9,9 +9,9 @@ user.get('/', async (req, res) => {
     try {
         const foundUsers = await User_data.findAll({
             order: [ [ 'user_id', 'ASC'] ],
-            // where: {
-            //     username: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
-            // }
+            where: {
+                username: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
+            }
         })
         res.status(200).json(foundUsers)
     } catch (error) {
@@ -23,7 +23,7 @@ user.get('/', async (req, res) => {
 user.get('/:id', async (req, res) => {
     try {
         const foundUser = await User_data.findOne({
-            where: { recipe_id: req.params.id }
+            where: { user_id: req.params.id }
         })
         res.status(200).json(foundUser)
     } catch (error) {
@@ -40,6 +40,26 @@ user.post('/', async (req, res) => {
             data: newUser
         })
     } catch(err) {
+        res.status(500).json(err)
+    }
+})
+
+// VERIFY LOGIN FOR USER
+user.post('/login', async (req, res) => {
+    try {
+        console.log(req.body)
+        const foundUser = await User_data.findOne({
+            where: { 
+                username: req.body.username,
+                password: req.body.password
+            }
+        })
+        if (foundUser) {
+            res.status(200).json(foundUser)
+        } else {
+            res.status(401).json({user_id: null})
+        }
+    } catch (err) {
         res.status(500).json(err)
     }
 })

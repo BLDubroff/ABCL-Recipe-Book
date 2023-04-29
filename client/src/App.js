@@ -9,7 +9,7 @@ import LoginSignupPage from './Components/LoginSignupPage';
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false)
-
+  const [user_id, setUserId] = useState(null)
   const [username, setUsername] = useState('')
 
 
@@ -17,6 +17,8 @@ function App() {
     <AccountContext.Provider value={{
       loggedIn, 
       setLoggedIn,
+      user_id,
+      setUserId,
       username,
       setUsername
     }}>

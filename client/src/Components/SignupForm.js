@@ -8,15 +8,18 @@ function SignupForm() {
 
     const navigate = useNavigate();
 
-    const {setLoggedIn, setUsername} = useContext(AccountContext)
+    const {setLoggedIn, setUserId, setUsername} = useContext(AccountContext)
 
     const username = useRef('')
     const password = useRef('')
 
     const handleSubmit = async (e, username, password) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const userInfo = JSON.stringify({username: username, password: password})
+        const userInfo = JSON.stringify({
+            username: username, 
+            password: password
+        })
 
         fetch(`${serverURL}/users`, {
             method: 'POST',
@@ -26,10 +29,12 @@ function SignupForm() {
             },
             body: userInfo,
         })
-            .then((res) => {
-                console.log(res)
-                setLoggedIn(true);
-                setUsername(username);
+            .then(res => res.json())
+            .then(body => {
+                console.log(body)
+                setLoggedIn(true)
+                setUserId(body.data.user_id)
+                setUsername(body.data.username)
                 navigate('/')
             })
 
