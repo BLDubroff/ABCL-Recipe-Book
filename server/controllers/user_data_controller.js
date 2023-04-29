@@ -3,6 +3,7 @@ const user = require('express').Router()
 const db = require('../models')
 const { User_data } = db 
 const { Op } = require('sequelize')
+const cookie = require('cookie')
 
 // FIND ALL USERS
 user.get('/', async (req, res) => {
@@ -55,10 +56,28 @@ user.post('/login', async (req, res) => {
             }
         })
         if (foundUser) {
-            res.status(200).json(foundUser)
+            //res.status(200).json(foundUser)
+            res.statusCode = 200
+            res.setHeader('Set-Cookie', cookie.serialize('sessionToken', String(foundUser.user_id), {
+                secure: true,
+                httpOnly: true
+            }))
+            res.json(foundUser)
+            res.end()
         } else {
             res.status(401).json({user_id: null})
         }
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+// TEST CONTROLLER 
+
+user.post('/test', async (req, res) => {
+    try {
+        console.log(req.headers.cookie)
+        res.status(200).json({cookies: req.headers.cookie})
     } catch (err) {
         res.status(500).json(err)
     }
