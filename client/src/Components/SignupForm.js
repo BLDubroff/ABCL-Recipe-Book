@@ -31,11 +31,18 @@ function SignupForm() {
         })
             .then(res => res.json())
             .then(body => {
-                console.log(body)
-                setLoggedIn(true)
-                setUserId(body.data.user_id)
-                setUsername(body.data.username)
-                navigate('/')
+                if (body.data) {
+                    console.log(body)
+                    setLoggedIn(true)
+                    setUserId(body.data.user_id)
+                    setUsername(body.data.username)
+                    navigate('/')
+                } else {
+                    body.errors.forEach(err => {
+                        console.log(`ERROR TYPE - ${err.type}: ${err.message}`)
+                    })
+                }
+
             })
 
     }
