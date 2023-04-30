@@ -45,29 +45,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      breakfast: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true
-      },
-      lunch: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true
-      },
-      dinner: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true
-      },
-      snack: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true
-      },
-      dessert: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true
+      tags: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        allowNull: false,
+        defaultValue: []
       },
       avg_rating: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       }
     });
   },

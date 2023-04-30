@@ -54,25 +54,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    breakfast:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    lunch:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    dinner:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    snack:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    dessert:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
+    tags: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+        defaultValue: []
     },
     avg_rating:{
         type: DataTypes.INTEGER,
