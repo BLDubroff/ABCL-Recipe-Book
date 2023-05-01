@@ -28,10 +28,21 @@ class Authentication {
             session_token: generateToken()
         }
 
-        const sessionToken = await Session_cookies.create(sessionTokenInfo)
+        const sessionToken = await Session_cookies.create(sessionCookieInfo)
 
         return sessionToken
 
+    }
+
+    static async confirmToken(user_id, session_token) {
+        const session = Session_cookies.findOne({
+            where: {
+                user_id: user_id,
+                session_token
+            }
+        })
+
+        return session !== null
     }
 }
 

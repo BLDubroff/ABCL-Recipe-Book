@@ -58,13 +58,17 @@ user.post('/login', async (req, res) => {
         if (foundUser) {
             //res.status(200).json(foundUser)
 
-            const sessionToken = await Authentication.createToken(foundUser.user_id)
+            const sessionToken = await Authentication.createCookie(foundUser.user_id)
 
             res.statusCode = 200
-            res.setHeader('Set-Cookie', cookie.serialize('sessionToken', sessionToken.session_token, {
+            res.setHeader('Set-Cookie', cookie.serialize('session_token', sessionToken.session_token, {
                 secure: true,
                 httpOnly: true
             }))
+            // res.setHeader('Set-Cookie', cookie.serialize('user_id', foundUser.user_id, {
+            //     secure: true,
+            //     httpOnly: true
+            // }))
             res.json(foundUser)
             res.end()
         } else {
@@ -81,6 +85,32 @@ user.post('/test', async (req, res) => {
     try {
         console.log(req.headers.cookie)
         res.status(200).json({cookies: req.headers.cookie})
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+user.post('/session', async (req, res) => {
+    try {
+        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+
+        console.log(user_id, session_token)
+
+        if (user_id === undefined || session_token === undefined) {
+            res.status(200).json({user_id: null})
+            return
+        }
+
+        if (Authentication.confirmToken(parseInt(user_id), session_token)) {
+            const user = await User_data.findOne({
+                where: {
+                    user_id: parseInt(user_id)
+                }
+            })
+            res.status(200).json(user)
+        } else {
+            res.status(200).json({user_id: null})
+        }
     } catch (err) {
         res.status(500).json(err)
     }
