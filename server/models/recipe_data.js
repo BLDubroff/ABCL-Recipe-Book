@@ -8,8 +8,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ User_data, Rating_reviews }) {
+        Recipe_data.belongsTo(User_data, {
+            foreignKey: 'user_id',
+            as: 'author'
+        }),
+        Recipe_data.hasMany(Rating_reviews, {
+            foreignKey: 'recipe_id',
+            as: 'reviews'
+        })
     }
   }
   Recipe_data.init({
@@ -54,34 +61,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    breakfast:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    lunch:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    dinner:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    snack:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
-    },
-    dessert:{
-        type: DataTypes.BOOLEAN,
-        allowNull: true
+    tags: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+        defaultValue: []
     },
     avg_rating:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     }
   }, {
     sequelize,
     modelName: 'Recipe_data',
-    tableName: 'recipe_data',
+    tableName: 'Recipe_data',
     timestamps: false
   });
   return Recipe_data;

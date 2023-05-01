@@ -8,19 +8,28 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ Recipe_data, Rating_reviews }) {
+      User_data.hasMany(Recipe_data, {
+        foreignKey: 'user_id',
+        as: 'recipes'
+      }),
+      User_data.hasMany(Rating_reviews, {
+        foreignKey: 'user_id',
+        as: 'reviews'
+      })
     }
   }
   User_data.init({
     user_id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     username:{
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     password:{
       type: DataTypes.TEXT,
@@ -29,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User_data',
-    tableName: 'user_data',
+    tableName: 'User_data',
     timestamps: false
   });
   return User_data;

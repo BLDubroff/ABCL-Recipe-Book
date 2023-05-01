@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AccountContext from "./Features/AccountContext";
+import { useState, useEffect } from "react";
+import ProfilePage from "./Components/ProfilePage";
+import LoginSignupPage from "./Components/LoginSignupPage";
+
+import Home from "./Pages/Home";
+import AddRecipe from "./Pages/recipes/addRecipe";
+import EditRecipe from "./Pages/recipes/editRecipe";
+import ShowRecipe from "./Pages/recipes/showRecipe";
+import ServerContext from "./Features/ServerContext";
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [user_id, setUserId] = useState(null)
+  const [username, setUsername] = useState('')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ServerContext.Provider value={{
+      serverURL: process.env.REACT_APP_SERVER_URL
+    }}>
+      <AccountContext.Provider value={{
+        loggedIn, 
+        setLoggedIn,
+        user_id,
+        setUserId,
+        username,
+        setUsername
+      }}>
+      <BrowserRouter>
+      <Navbar />
+        <Routes>
+
+            <Route path="/" element={<Home />} />
+
+            <Route path="/addRecipe" element={<AddRecipe />} />
+
+            <Route path="/editRecipe" element={<EditRecipe />} />
+
+            <Route path="/recipes" element={< ShowRecipe/>} />
+
+            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route path="/login" element={<LoginSignupPage />} />
+            
+          </Routes>
+        </BrowserRouter>
+      </AccountContext.Provider>
+    </ServerContext.Provider>
+    
   );
 }
 
