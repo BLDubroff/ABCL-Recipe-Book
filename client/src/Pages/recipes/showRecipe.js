@@ -2,7 +2,7 @@ import React from "react";
 
 const  ShowRecipe = (recipe_data) => {
   return (
-    <div>
+    <div key={recipe_data.recipe_id}>
       <div>
         <h4> Recipe</h4>
         <h1>{recipe_data.title}</h1>

@@ -3,6 +3,8 @@ const recipes = require('express').Router()
 const db = require('../models')
 const { Recipe_data, User_data, Rating_reviews } = db 
 const { Op } = require('sequelize')
+const cookie = require('cookie')
+const Authentication = require('../authentication')
 
 // FIND ALL RECIPES
 recipes.get('/', async (req, res) => {
@@ -45,28 +47,42 @@ recipes.get('/:id', async (req, res) => {
 recipes.post('/', async (req, res) => {
     try {
 
-        const recipeInfo = {
+        console.log(req.headers.cookie)
 
+        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+
+        if (user_id === undefined || session_token === undefined) {
+            res.status(401).json({recipe_id: null})
+            return
         }
 
-        // {
-        //     "user_id": 1,
-        //     "title": "Grammy's Best Brownies",
-        //     "description": "These brownies rock",
-        //     "recipe_content": "Make the brownies like my grammy made them. Duh.",
-        //     "prep_time_in_minutes": 30,
-        //     "cook_time_in_minutes": 60,
-        //     "total_time_in_minutes": 90,
-        //     "servings": 12,
-        //     "tags": ["dessert", "chocolate", "vegan"],
-        //     "avg_rating": 3
-        // }
+        if (Authentication.confirmToken(parseInt(user_id), session_token)) {
 
-        const newRecipe = await Recipe_data.create(req.body)
-        res.status(200).json({
-            message: 'Successfully inserted a new recipe',
-            data: newRecipe
-        })
+            console.log("Auth confirmed")
+
+            const recipeInfo = {
+                user_id: user_id,
+                title: req.body.title,
+                description: req.body.description,
+                recipe_content: req.body.content,
+                prep_time_in_minutes: req.body.prepTime,
+                cook_time_in_minutes: req.body.cookTime,
+                total_time_in_minutes: req.body.prepTime + req.body.cookTime,
+                servings: req.body.servings,
+                tags: req.body.tags.toLowerCase().split(' '),
+                avg_rating: 3
+            }
+    
+            const newRecipe = await Recipe_data.create(recipeInfo)
+            res.status(200).json({
+                message: 'Successfully inserted a new recipe',
+                data: newRecipe
+            })
+
+        } else {
+            res.status(401).json({recipe_id: null})
+        }
+
     } catch(err) {
         res.status(500).json(err)
     }

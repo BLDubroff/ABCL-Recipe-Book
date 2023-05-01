@@ -2,7 +2,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountContext from "./Features/AccountContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProfilePage from "./Components/ProfilePage";
 import LoginSignupPage from "./Components/LoginSignupPage";
 
@@ -18,45 +18,33 @@ function App() {
   const [user_id, setUserId] = useState(null)
   const [username, setUsername] = useState('')
 
-  useEffect(() => {
-    fetch(`${serverURL}/users/session`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-          "Content-Type": "application/json",
-      },
-      credentials: 'include'
-  })
-      .then(res => res.json())
-      .then(body => {
-          if (body.user_id) {
-              setLoggedIn(true)
-              setUserId(body.user_id)
-              setUsername(body.username)
-          } else {
-              console.log('Login failed')
-          }
-      })
-  }, [])
-
   return (
-    <AccountContext.Provider value={{
-      loggedIn, 
-      setLoggedIn,
-      user_id,
-      setUserId,
-      username,
-      setUsername
+    <ServerContext.Provider value={{
+      serverURL: process.env.REACT_APP_SERVER_URL
     }}>
+      <AccountContext.Provider value={{
+        loggedIn, 
+        setLoggedIn,
+        user_id,
+        setUserId,
+        username,
+        setUsername
+      }}>
       <BrowserRouter>
       <Navbar />
         <Routes>
+
+            <Route path="/" element={<Home />} />
 
             <Route path="/addRecipe" element={<AddRecipe />} />
 
             <Route path="/editRecipe" element={<EditRecipe />} />
 
             <Route path="/recipes" element={< ShowRecipe/>} />
+
+            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route path="/login" element={<LoginSignupPage />} />
             
           </Routes>
         </BrowserRouter>

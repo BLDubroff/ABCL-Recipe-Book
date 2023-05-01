@@ -40,8 +40,9 @@ const AddRecipe = (props) => {
       headers: {
           "Content-Type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify(recipeInfo),
-  })
+    })
       .then((res) => {
           console.log(res)
       })
@@ -52,7 +53,7 @@ const AddRecipe = (props) => {
       <h2> Add Recipe </h2>
       <form>
         <div>
-          <label for='title'>Title: </label>
+          <label htmlFor='title'>Title: </label>
           <input
             ref={title}
             type="text"
@@ -65,7 +66,7 @@ const AddRecipe = (props) => {
           <input placeholder="Picture" id="pic" name="pic" />
         </div>
         <div>
-          <label for='description'>Description: </label>
+          <label htmlFor='description'>Description: </label>
           <input
             ref={description}
             type="text"
@@ -75,7 +76,7 @@ const AddRecipe = (props) => {
           />
         </div>
         <div>
-          <label for="content">Recipe: </label>
+          <label htmlFor="content">Recipe: </label>
           <input
           ref={content}
             type="text"
@@ -85,7 +86,7 @@ const AddRecipe = (props) => {
           />
         </div>
         <div>
-          <label for="prep-time">Prep Time: </label>
+          <label htmlFor="prep-time">Prep Time: </label>
           <input
             ref={prepTime}
             type="number"
@@ -93,7 +94,7 @@ const AddRecipe = (props) => {
             name="prep-time"
           />
 
-          <label for="cook-time">Cook Time: </label>
+          <label htmlFor="cook-time">Cook Time: </label>
           <input
             ref={cookTime}
             type="number"
@@ -103,7 +104,7 @@ const AddRecipe = (props) => {
 
         </div>
         <div>
-          <label for="servings">Servings: </label>
+          <label htmlFor="servings">Servings: </label>
           <input
             ref={servings}
             type="number"
@@ -112,7 +113,7 @@ const AddRecipe = (props) => {
           />
         </div>
         <div>
-          <label for="tags">Tags: </label>
+          <label htmlFor="tags">Tags: </label>
           <input 
             ref={tags}
             type="text"

@@ -71,14 +71,18 @@ user.post('/login', async (req, res) => {
             const sessionToken = await Authentication.createCookie(foundUser.user_id)
 
             res.statusCode = 200
-            res.setHeader('Set-Cookie', cookie.serialize('session_token', sessionToken.session_token, {
-                secure: true,
-                httpOnly: true
-            }))
-            // res.setHeader('Set-Cookie', cookie.serialize('user_id', foundUser.user_id, {
-            //     secure: true,
-            //     httpOnly: true
-            // }))
+            res.setHeader('Set-Cookie', [
+                cookie.serialize('session_token', sessionToken.session_token, {
+                    secure: true,
+                    httpOnly: true,
+                    path: '/'
+                }),
+                cookie.serialize('user_id', foundUser.user_id, {
+                    secure: true,
+                    httpOnly: true,
+                    path: '/'
+                })
+            ])
             res.json(foundUser)
             res.end()
         } else {
