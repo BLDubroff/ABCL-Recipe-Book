@@ -4,7 +4,7 @@ const  ShowRecipe = (recipe_data) => {
   return (
     <div key={recipe_data.recipe_id}>
       <div>
-        <h4> Recipe</h4>
+        <h4>Recipe</h4>
         <h1>{recipe_data.title}</h1>
       </div>
       <div>
@@ -19,13 +19,13 @@ const  ShowRecipe = (recipe_data) => {
       <div>
         <p>
           {" "}
-          Preparation Time
-          {recipe_data.prep_time_minutes}, Cook Time{recipe_data.cook_time_minutes},
-          Total time{recipe_data.total_time_minutes},
+          Preparation Time:
+          {recipe_data.prep_time_in_minutes}, Cook Time: {recipe_data.cook_time_in_minutes},
+          Total time: {recipe_data.total_time_in_minutes},
         </p>
         <div>
           <p>
-            Servings
+            Servings:
             {recipe_data.servings}
           </p>
         </div>
