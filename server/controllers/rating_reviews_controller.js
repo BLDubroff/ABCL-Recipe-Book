@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const reviews = require('express').Router()
 const db = require('../models')
-const { Rating_reviews } = db 
+const { Rating_reviews, User_data, Recipe_data } = db 
 const { Op } = require('sequelize')
 
 // FIND ALL REVIEWS
@@ -9,9 +9,16 @@ reviews.get('/', async (req, res) => {
     try {
         const foundReviews = await Rating_reviews.findAll({
             order: [ [ 'rating_reviews_id', 'ASC'] ],
-            // where: {
-            //     name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%`}
-            // }
+            include: [
+                {
+                    model: User_data,
+                    as: 'author'
+                },
+                {
+                    model: Recipe_data,
+                    as: 'recipe'
+                }
+            ]
         })
         res.status(200).json(foundReviews)
     } catch (error) {

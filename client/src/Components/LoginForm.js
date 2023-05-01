@@ -1,14 +1,14 @@
 import { useContext, useRef } from "react"
 import AccountContext from "../Features/AccountContext"
 import { useNavigate } from "react-router-dom"
-
-const serverURL = process.env.REACT_APP_SERVER_URL
+import ServerContext from "../Features/ServerContext";
 
 function LoginForm() {
 
     const navigate = useNavigate();
 
     const {setLoggedIn, setUserId, setUsername} = useContext(AccountContext)
+    const { serverURL } = useContext(ServerContext)
 
     const username = useRef('')
     const password = useRef('')
@@ -27,6 +27,7 @@ function LoginForm() {
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: 'include',
             body: userInfo,
         })
             .then(res => res.json())
@@ -42,14 +43,32 @@ function LoginForm() {
             })
     }
 
+    // const testCookies = () => {
+    //     fetch(`${serverURL}/users/test`, {
+    //         method: 'POST',
+    //         mode: 'cors',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         credentials: 'include'
+    //     })
+    //         .then(res => res.json())
+    //         .then(body => {
+    //             console.log(body)
+    //         })
+    // }
+
     return (
-        <form>
-            <label htmlFor="username">Username: </label>
-            <input ref={username} id="username" name="username" type="text" />
-            <label htmlFor="password">Password</label>
-            <input ref={password} id="password" name="password" type="text" />
-            <button onClick={(e) => handleSubmit(e, username.current.value, password.current.value)}>Log in</button>
-        </form>
+        <>
+            <form>
+                <label htmlFor="username">Username: </label>
+                <input ref={username} id="username" name="username" type="text" />
+                <label htmlFor="password">Password</label>
+                <input ref={password} id="password" name="password" type="text" />
+                <button onClick={(e) => handleSubmit(e, username.current.value, password.current.value)}>Log in</button>
+            </form>
+        </>
+
     )
 }
 

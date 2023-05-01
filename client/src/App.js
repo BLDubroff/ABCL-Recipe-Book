@@ -1,10 +1,16 @@
-import './App.css';
-import Navbar from './Components/Navbar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AccountContext from './Features/AccountContext';
-import { useState } from 'react';
-import ProfilePage from './Components/ProfilePage';
-import LoginSignupPage from './Components/LoginSignupPage';
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AccountContext from "./Features/AccountContext";
+import { useState, useEffect } from "react";
+import ProfilePage from "./Components/ProfilePage";
+import LoginSignupPage from "./Components/LoginSignupPage";
+
+import Home from "./Pages/Home";
+import AddRecipe from "./Pages/recipes/addRecipe";
+import EditRecipe from "./Pages/recipes/editRecipe";
+import ShowRecipe from "./Pages/recipes/showRecipe";
+import ServerContext from "./Features/ServerContext";
 
 function App() {
 
@@ -12,36 +18,39 @@ function App() {
   const [user_id, setUserId] = useState(null)
   const [username, setUsername] = useState('')
 
-
   return (
-    <AccountContext.Provider value={{
-      loggedIn, 
-      setLoggedIn,
-      user_id,
-      setUserId,
-      username,
-      setUsername
+    <ServerContext.Provider value={{
+      serverURL: process.env.REACT_APP_SERVER_URL
     }}>
+      <AccountContext.Provider value={{
+        loggedIn, 
+        setLoggedIn,
+        user_id,
+        setUserId,
+        username,
+        setUsername
+      }}>
       <BrowserRouter>
       <Navbar />
         <Routes>
 
-          <Route path='/' element={
-            <h1>Homepage</h1>
-          } />
-          
-          <Route path='/login' element={
-            <LoginSignupPage />
-          } />
+            <Route path="/" element={<Home />} />
 
-          <Route path='/profile' element={
-            <ProfilePage />
-          } />
-          
-        </Routes>
-      </ BrowserRouter>
-    </ AccountContext.Provider>
+            <Route path="/addRecipe" element={<AddRecipe />} />
 
+            <Route path="/editRecipe" element={<EditRecipe />} />
+
+            <Route path="/recipes" element={< ShowRecipe/>} />
+
+            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route path="/login" element={<LoginSignupPage />} />
+            
+          </Routes>
+        </BrowserRouter>
+      </AccountContext.Provider>
+    </ServerContext.Provider>
+    
   );
 }
 

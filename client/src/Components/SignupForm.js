@@ -1,14 +1,14 @@
 import AccountContext from "../Features/AccountContext";
 import { useContext, useRef } from "react"
 import { useNavigate } from "react-router-dom"
-
-const serverURL = process.env.REACT_APP_SERVER_URL
+import ServerContext from "../Features/ServerContext";
 
 function SignupForm() {
 
     const navigate = useNavigate();
 
-    const {setLoggedIn, setUserId, setUsername} = useContext(AccountContext)
+    const { setLoggedIn, setUsername } = useContext(AccountContext);
+    const { serverURL } = useContext(ServerContext);
 
     const username = useRef('')
     const password = useRef('')
