@@ -90,7 +90,7 @@ recipes.put('/:id', async (req, res) => {
 
         const { user_id, session_token } = cookie.parse(req.headers.cookie)
 
-        if (user_id === undefined || session_token === undefined) {
+        if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
             res.status(401).json({recipe_id: null})
             return
         }
