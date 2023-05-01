@@ -11,6 +11,7 @@ import AddRecipe from "./Pages/recipes/addRecipe";
 import EditRecipe from "./Pages/recipes/editRecipe";
 import ShowRecipe from "./Pages/recipes/showRecipe";
 import ServerContext from "./Features/ServerContext";
+import RecipePage from "./Pages/recipes/recipePage";
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
 
             <Route path="/editRecipe" element={<EditRecipe />} />
 
-            <Route path="/recipes" element={< ShowRecipe/>} />
+            <Route path="/recipe/:recipe_id" element={<RecipePage />} />
 
             <Route path="/profile" element={<ProfilePage />} />
 

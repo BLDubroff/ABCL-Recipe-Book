@@ -7,7 +7,7 @@ function SignupForm() {
 
     const navigate = useNavigate();
 
-    const { setLoggedIn, setUsername } = useContext(AccountContext);
+    const { setLoggedIn, setUsername, setUserId } = useContext(AccountContext);
     const { serverURL } = useContext(ServerContext);
 
     const username = useRef('')
