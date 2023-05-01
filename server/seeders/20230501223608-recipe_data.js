@@ -7,6 +7,7 @@ module.exports = {
       recipe_id: 1 ,
       user_id: 1 ,
       title: 'Focaccia Bread',
+      pic: null,
       description: 'Delicious flaky Italian bread',
       recipe_content: 'make your grandmother proud and bake bread',
       prep_time_in_minutes: 180,
@@ -17,7 +18,8 @@ module.exports = {
         'Italian',
         'Dinner',
         'Snack'
-      ]
+      ],
+      avg_rating: null
     }], {});
   },
 
