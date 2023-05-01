@@ -39,7 +39,7 @@ function App() {
 
             <Route path="/addRecipe" element={<AddRecipe />} />
 
-            <Route path="/editRecipe" element={<EditRecipe />} />
+            <Route path="/editRecipe/:recipe_id" element={<EditRecipe />} />
 
             <Route path="/recipe/:recipe_id" element={<RecipePage />} />
 

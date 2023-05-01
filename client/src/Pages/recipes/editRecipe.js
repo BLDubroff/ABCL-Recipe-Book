@@ -1,4 +1,6 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import ServerContext from "../../Features/ServerContext";
 
 const EditRecipe = () => {
@@ -11,14 +13,38 @@ const EditRecipe = () => {
   const servings = useRef();
   const tags = useRef('');
   
-  const { serverURL } = useContext(ServerContext)
+  const { serverURL } = useContext(ServerContext);
+  const { recipe_id } = useParams();
 
-  const handleAdd = (e, recipeInfo) => {
+  const [recipe_data, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const retrieveRecipe = async () => {
+        setLoading(true);
+        const res = await axios.get(`${serverURL}/recipes/${recipe_id}`);
+        const recipe_info = {
+          user_id: res.data.user_id,
+          title: res.data.title,
+          description: res.data.description,
+          recipe_content: res.data.recipe_content,
+          prep_time_in_minutes: res.data.prep_time_in_minutes,
+          cook_time_in_minutes: res.data.cook_time_in_minutes,
+          servings: res.data.servings,
+          tags: res.data.tags.join(' '),
+        }
+        setRecipe(recipe_info);
+        setLoading(false);
+      };
+      retrieveRecipe();
+  }, []);
+
+  const handleEdit = (e, recipeInfo) => {
 
     e.preventDefault();
 
-    fetch(`${serverURL}/recipes`, {
-      method: 'POST',
+    fetch(`${serverURL}/recipes/${recipe_id}`, {
+      method: 'PUT',
       mode: 'cors',
       headers: {
           "Content-Type": "application/json",
@@ -42,7 +68,7 @@ const EditRecipe = () => {
             type="text"
             id="title"
             name="title"
-            placeholder="Recipe Name"
+            defaultValue={recipe_data.title}
           />
         </div>
         <div>
@@ -55,7 +81,7 @@ const EditRecipe = () => {
             type="text"
             id="description"
             name="name"
-            placeholder="Description"
+            defaultValue={recipe_data.description}
           />
         </div>
         <div>
@@ -65,7 +91,7 @@ const EditRecipe = () => {
             type="text"
             id="content"
             name="content"
-            placeholder="Recipe content"
+            defaultValue={recipe_data.recipe_content}
           />
         </div>
         <div>
@@ -75,6 +101,7 @@ const EditRecipe = () => {
             type="number"
             id="prep-time"
             name="prep-time"
+            defaultValue={recipe_data.prep_time_in_minutes}
           />
 
           <label htmlFor="cook-time">Cook Time: </label>
@@ -83,6 +110,7 @@ const EditRecipe = () => {
             type="number"
             id="cook-time"
             name="cook-time"
+            defaultValue={recipe_data.cook_time_in_minutes}
           />
 
         </div>
@@ -93,6 +121,7 @@ const EditRecipe = () => {
             type="number"
             id="servings"
             name="servings"
+            defaultValue={recipe_data.servings}
           />
         </div>
         <div>
@@ -102,11 +131,12 @@ const EditRecipe = () => {
             type="text"
             id="tags"
             name="tags"
+            defaultValue={recipe_data.tags}
           />
         </div>
         
         <div>
-          <button type="submit" onClick={(e) => handleAdd(
+          <button type="submit" onClick={(e) => handleEdit(
             e, {
               title: title.current.value,
               description: description.current.value,

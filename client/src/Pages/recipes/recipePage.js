@@ -19,7 +19,7 @@ const  RecipePage = () => {
           setLoading(false);
         };
         retrieveRecipe();
-      }, []);
+    }, []);
 
     return (
         <div key={recipe_data.recipe_id}>
