@@ -1,20 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const  ShowRecipe = (recipe_data) => {
   return (
     <div key={recipe_data.recipe_id}>
       <div>
-        <h4>Recipe</h4>
-        <h1>{recipe_data.title}</h1>
+        <Link to={`/recipe/${recipe_data.recipe_id}`}>
+          <h1>{recipe_data.title}</h1>
+        </Link>
       </div>
       <div>
         <img src={recipe_data.img} alt={recipe_data.name} />
       </div>
       <div>
         <h2>{recipe_data.description}</h2>
-      </div>
-      <div>
-        <p>{recipe_data.recipe_content}</p>
       </div>
       <div>
         <p>
