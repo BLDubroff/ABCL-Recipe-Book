@@ -13,29 +13,44 @@ import ShowRecipe from "./Pages/recipes/showRecipe";
 import ServerContext from "./Features/ServerContext";
 
 function App() {
-  
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
+
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [user_id, setUserId] = useState(null)
+  const [username, setUsername] = useState('')
+
+  useEffect(() => {
+    fetch(`${serverURL}/users/session`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      credentials: 'include'
+  })
+      .then(res => res.json())
+      .then(body => {
+          if (body.user_id) {
+              setLoggedIn(true)
+              setUserId(body.user_id)
+              setUsername(body.username)
+          } else {
+              console.log('Login failed')
+          }
+      })
+  }, [])
 
   return (
-    <ServerContext.Provider>
-      <AccountContext.Provider
-        value={{
-          loggedIn,
-          setLoggedIn,
-          username,
-          setUsername,
-        }}
-      >
-        <BrowserRouter>
-          <Navbar />
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-
-            <Route path="/login" element={<LoginSignupPage />} />
-
-            <Route path="/profile" element={<ProfilePage />} />
+    <AccountContext.Provider value={{
+      loggedIn, 
+      setLoggedIn,
+      user_id,
+      setUserId,
+      username,
+      setUsername
+    }}>
+      <BrowserRouter>
+      <Navbar />
+        <Routes>
 
             <Route path="/addRecipe" element={<AddRecipe />} />
 
