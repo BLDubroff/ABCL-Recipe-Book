@@ -67,7 +67,7 @@ recipes.post('/', async (req, res) => {
                 recipe_content: req.body.content,
                 prep_time_in_minutes: req.body.prepTime,
                 cook_time_in_minutes: req.body.cookTime,
-                total_time_in_minutes: req.body.prepTime + req.body.cookTime,
+                total_time_in_minutes: parseInt(req.body.prepTime) + parseInt(req.body.cookTime),
                 servings: req.body.servings,
                 tags: req.body.tags.toLowerCase().split(' '),
                 avg_rating: 3
