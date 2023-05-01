@@ -4,6 +4,7 @@ const db = require('../models')
 const { User_data } = db 
 const { Op } = require('sequelize')
 const cookie = require('cookie')
+const Authentication = require('../authentication')
 
 // FIND ALL USERS
 user.get('/', async (req, res) => {
@@ -48,7 +49,6 @@ user.post('/', async (req, res) => {
 // VERIFY LOGIN FOR USER
 user.post('/login', async (req, res) => {
     try {
-        console.log(req.body)
         const foundUser = await User_data.findOne({
             where: { 
                 username: req.body.username,
@@ -57,8 +57,11 @@ user.post('/login', async (req, res) => {
         })
         if (foundUser) {
             //res.status(200).json(foundUser)
+
+            const sessionToken = await Authentication.createToken(foundUser.user_id)
+
             res.statusCode = 200
-            res.setHeader('Set-Cookie', cookie.serialize('sessionToken', String(foundUser.user_id), {
+            res.setHeader('Set-Cookie', cookie.serialize('sessionToken', sessionToken.session_token, {
                 secure: true,
                 httpOnly: true
             }))
