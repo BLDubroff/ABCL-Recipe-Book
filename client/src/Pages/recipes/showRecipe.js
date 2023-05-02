@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import ServerContext from "../../Features/ServerContext";
 
 const  ShowRecipe = (recipe_data) => {
+  const { serverURL } = useContext(ServerContext)
+  const handleAdd = (e, recipeInfo) => {
+
+    e.preventDefault();
+
+    fetch(`${serverURL}/recipes`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      credentials: 'include',
+      body: JSON.stringify(recipeInfo),
+    })
+      .then((res) => {
+          console.log(res)
+      })
+  }
   return (
     <div key={recipe_data.recipe_id}>
       <div>

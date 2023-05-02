@@ -1,16 +1,8 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { useState } from "react";
-import axios from "axios";
+import React, { useContext, useEffect, useRef  } from "react";
+
 import ServerContext from "../../Features/ServerContext";
 
 const AddRecipe = (props) => {
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [recipeContent, setContent] = useState("");
-  // const [cookTime, setCookTime] = useState(0);
-  // const [prepTime, setPrepTIme] = useState(0);
-  // const [totalTime, setTotalTime] = useState(0);
-  // const [servings, setServings] = useState(0);
 
   const title = useRef('');
   const description = useRef('');
@@ -21,18 +13,12 @@ const AddRecipe = (props) => {
   const tags = useRef('');
   
   const { serverURL } = useContext(ServerContext)
-
-  //const { handleAdd } = props;
-
-  // useEffect(() => {
-  //   axios.get(`${serverURL}/recipes`).then((response) => {
-  //     setTitle(response.data);
-  //   });
-  // });
+  // const navigate = useEffect();
 
   const handleAdd = (e, recipeInfo) => {
 
     e.preventDefault();
+    
 
     fetch(`${serverURL}/recipes`, {
       method: 'POST',
@@ -44,8 +30,9 @@ const AddRecipe = (props) => {
       body: JSON.stringify(recipeInfo),
     })
       .then((res) => {
-          console.log(res)
+        console.log(res)
       })
+      // navigate('/Home')
   }
 
   return (
