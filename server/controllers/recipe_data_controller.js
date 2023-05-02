@@ -95,7 +95,7 @@ recipes.put('/:id', async (req, res) => {
             return
         }
 
-        if (Authentication.confirmToken(parseInt(user_id), session_token)) {
+        if (await Authentication.confirmToken(parseInt(user_id), session_token)) {
 
             const recipeInfo = {
                 user_id: user_id,
@@ -139,7 +139,7 @@ recipes.delete('/:id', async (req, res) => {
             return
         }
 
-        if (Authentication.confirmToken(parseInt(user_id), session_token)) {
+        if (await Authentication.confirmToken(parseInt(user_id), session_token)) {
             const deletedRecipe = await Recipe_data.destroy({
                 where: {
                     recipe_id: req.params.id
