@@ -123,7 +123,7 @@ user.post('/session', async (req, res) => {
             })
             res.status(200).json(user)
         } else {
-            res.status(200).json({user_id: null})
+            res.status(401).json({user_id: null})
         }
     } catch (err) {
         res.status(500).json(err)

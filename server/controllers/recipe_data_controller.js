@@ -132,14 +132,25 @@ recipes.put('/:id', async (req, res) => {
 // DELETE A RECIPE
 recipes.delete('/:id', async (req, res) => {
     try {
-        const deletedRecipe = await Recipe_data.destroy({
-            where: {
-                recipe_id: req.params.id
-            }
-        })
-        res.status(200).json({
-            message: `Successfully deleted ${deletedRecipe} recipe(s)`
-        })
+        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+
+        if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
+            res.status(401).json({recipe_id: null})
+            return
+        }
+
+        if (Authentication.confirmToken(parseInt(user_id), session_token)) {
+            const deletedRecipe = await Recipe_data.destroy({
+                where: {
+                    recipe_id: req.params.id
+                }
+            })
+            res.status(200).json({
+                message: `Successfully deleted ${deletedRecipe} recipe(s)`
+            })
+        } else {
+            res.status(401).json({recipe_id: null})
+        }
     } catch(err) {
         res.status(500).json(err)
     }
