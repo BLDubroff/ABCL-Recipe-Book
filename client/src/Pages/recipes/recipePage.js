@@ -14,7 +14,7 @@ const  RecipePage = () => {
     useEffect(() => {
         const retrieveRecipe = async () => {
           setLoading(true);
-          const res = await axios.get(`${serverURL}/recipes/${recipe_id}`);
+          const res = await axios.get(`${serverURL}/recipes/show/${recipe_id}`);
           setRecipe(res.data);
           setLoading(false);
         };

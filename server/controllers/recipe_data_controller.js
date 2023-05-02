@@ -31,8 +31,23 @@ recipes.get('/', async (req, res) => {
     }
 })
 
+// SEARCH RECIPES
+recipes.get('/search', async (req, res) => {
+    try {
+
+        const tags = await JSON.parse(req.query.tags)
+
+        const foundRecipe = await Recipe_data.findAll({
+            where: { tags: { [Op.contains]: tags } }
+        })
+        res.status(200).json(foundRecipe)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
 // FIND A SPECIFIC RECIPE
-recipes.get('/:id', async (req, res) => {
+recipes.get('/show/:id', async (req, res) => {
     try {
         const foundRecipe = await Recipe_data.findOne({
             where: { recipe_id: req.params.id }
