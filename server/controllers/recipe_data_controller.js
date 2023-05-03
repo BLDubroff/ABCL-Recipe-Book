@@ -39,7 +39,17 @@ recipes.get('/search', async (req, res) => {
         const tags = await JSON.parse(req.query.tags)
 
         const foundRecipe = await Recipe_data.findAll({
-            where: { tags: { [Op.contains]: tags } }
+            where: { tags: { [Op.contains]: tags } },
+            include: [
+                {
+                    model: User_data,
+                    as: 'author'
+                },
+                {
+                    model: Rating_reviews,
+                    as: 'reviews'
+                }
+            ]
         })
         res.status(200).json(foundRecipe)
     } catch (error) {

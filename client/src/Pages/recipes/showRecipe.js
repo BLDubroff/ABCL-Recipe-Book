@@ -8,6 +8,7 @@ const  ShowRecipe = (recipe_data) => {
         <Link to={`/recipe/${recipe_data.recipe_id}`}>
           <h1>{recipe_data.title}</h1>
         </Link>
+        <h2>{recipe_data.author.username}</h2>
       </div>
       <div>
         <img src={recipe_data.img} alt={recipe_data.name} />
