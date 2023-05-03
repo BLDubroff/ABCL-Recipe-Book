@@ -104,18 +104,30 @@ user.post('/test', async (req, res) => {
     }
 })
 
+user.post('/session/view', async (req, res) => {
+    try {
+
+        const tokens = await Authentication.viewSessionTokens();
+
+        res.status(200).json(tokens)
+
+    } catch(err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+
 user.post('/session', async (req, res) => {
     try {
         const { user_id, session_token } = cookie.parse(req.headers.cookie)
-
-        console.log(user_id, session_token)
 
         if (user_id === undefined || session_token === undefined) {
             res.status(200).json({user_id: null})
             return
         }
 
-        if (Authentication.confirmToken(parseInt(user_id), session_token)) {
+        if (await Authentication.confirmToken(parseInt(user_id), session_token)) {
+            console.log("LOGGING IN WITH SESSION TOKEN")
             const user = await User_data.findOne({
                 where: {
                     user_id: parseInt(user_id)
@@ -123,9 +135,10 @@ user.post('/session', async (req, res) => {
             })
             res.status(200).json(user)
         } else {
-            res.status(200).json({user_id: null})
+            res.status(401).json({user_id: null})
         }
     } catch (err) {
+        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -157,6 +170,22 @@ user.delete('/:id', async (req, res) => {
         res.status(200).json({
             message: `Successfully deleted ${deletedUser} user(s)`
         })
+    } catch(err) {
+        res.status(500).json(err)
+    }
+})
+
+user.delete('/logout/:id', async (req, res) => {
+    try {
+        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+
+        if (user_id === undefined || session_token === undefined) {
+            res.status(200).json({user_id: null})
+            return
+        }
+
+        await Authentication.logout(user_id, session_token)
+        res.status(200).json({message: "Logged out successfully"})
     } catch(err) {
         res.status(500).json(err)
     }

@@ -31,8 +31,23 @@ recipes.get('/', async (req, res) => {
     }
 })
 
+// SEARCH RECIPES
+recipes.get('/search', async (req, res) => {
+    try {
+
+        const tags = await JSON.parse(req.query.tags)
+
+        const foundRecipe = await Recipe_data.findAll({
+            where: { tags: { [Op.contains]: tags } }
+        })
+        res.status(200).json(foundRecipe)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
 // FIND A SPECIFIC RECIPE
-recipes.get('/:id', async (req, res) => {
+recipes.get('/show/:id', async (req, res) => {
     try {
         const foundRecipe = await Recipe_data.findOne({
             where: { recipe_id: req.params.id }
@@ -47,8 +62,6 @@ recipes.get('/:id', async (req, res) => {
 recipes.post('/', async (req, res) => {
     try {
 
-        console.log(req.headers.cookie)
-
         const { user_id, session_token } = cookie.parse(req.headers.cookie)
 
         if (user_id === undefined || session_token === undefined) {
@@ -57,8 +70,6 @@ recipes.post('/', async (req, res) => {
         }
 
         if (Authentication.confirmToken(parseInt(user_id), session_token)) {
-
-            console.log("Auth confirmed")
 
             const recipeInfo = {
                 user_id: user_id,
@@ -91,15 +102,44 @@ recipes.post('/', async (req, res) => {
 // UPDATE A RECIPE
 recipes.put('/:id', async (req, res) => {
     try {
-        const updatedRecipe = await Recipe_data.update(req.body, {
-            where: {
-                recipe_id: req.params.id
+
+        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+
+        if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
+            res.status(401).json({recipe_id: null})
+            return
+        }
+
+        if (await Authentication.confirmToken(parseInt(user_id), session_token)) {
+
+            const recipeInfo = {
+                user_id: user_id,
+                title: req.body.title,
+                description: req.body.description,
+                recipe_content: req.body.content,
+                prep_time_in_minutes: parseInt(req.body.prepTime),
+                cook_time_in_minutes: parseInt(req.body.cookTime),
+                total_time_in_minutes: parseInt(req.body.prepTime) + parseInt(req.body.cookTime),
+                servings: parseInt(req.body.servings),
+                tags: req.body.tags.toLowerCase().split(' '),
+                avg_rating: 3
             }
-        })
-        res.status(200).json({
-            message: `Successfully updated ${updatedRecipe} recipe(s)`
-        })
+    
+            const updatedRecipe = await Recipe_data.update(recipeInfo, {
+                where: {
+                    recipe_id: req.params.id
+                }
+            })
+            res.status(200).json({
+                message: `Successfully updated ${updatedRecipe} recipe(s)`
+            })
+
+        } else {
+            res.status(401).json({recipe_id: null})
+        }
+
     } catch(err) {
+        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -107,14 +147,25 @@ recipes.put('/:id', async (req, res) => {
 // DELETE A RECIPE
 recipes.delete('/:id', async (req, res) => {
     try {
-        const deletedRecipe = await Recipe_data.destroy({
-            where: {
-                recipe_id: req.params.id
-            }
-        })
-        res.status(200).json({
-            message: `Successfully deleted ${deletedRecipe} recipe(s)`
-        })
+        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+
+        if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
+            res.status(401).json({recipe_id: null})
+            return
+        }
+
+        if (await Authentication.confirmToken(parseInt(user_id), session_token)) {
+            const deletedRecipe = await Recipe_data.destroy({
+                where: {
+                    recipe_id: req.params.id
+                }
+            })
+            res.status(200).json({
+                message: `Successfully deleted ${deletedRecipe} recipe(s)`
+            })
+        } else {
+            res.status(401).json({recipe_id: null})
+        }
     } catch(err) {
         res.status(500).json(err)
     }
