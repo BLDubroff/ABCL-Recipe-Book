@@ -41,7 +41,6 @@ const AddRecipe = (props) => {
   return (
     <Form>
       <h2> Add Recipe </h2>
-      <form>
       <InputGroup className="mb-3">
           <label htmlFor='title'>Title: </label>
           <Form.Control
@@ -127,7 +126,6 @@ const AddRecipe = (props) => {
             Submit
           </button>
         </div>
-      </form>
     </Form>
   );
 };
