@@ -26,8 +26,10 @@ const  ShowRecipe = (recipe_data) => {
           <p>
             Servings:
             {recipe_data.servings}
+
           </p>
         </div>
+       
       </div>
     </div>
   );
