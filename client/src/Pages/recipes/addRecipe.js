@@ -1,7 +1,11 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef  } from "react";
 import ServerContext from "../../Features/ServerContext";
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
-const AddRecipe = () => {
+
+
+const AddRecipe = (props) => {
 
   const title = useRef('');
   const description = useRef('');
@@ -12,10 +16,12 @@ const AddRecipe = () => {
   const tags = useRef('');
   
   const { serverURL } = useContext(ServerContext)
+  // const navigate = useEffect();
 
   const handleAdd = (e, recipeInfo) => {
 
     e.preventDefault();
+    
 
     fetch(`${serverURL}/recipes`, {
       method: 'POST',
@@ -27,26 +33,27 @@ const AddRecipe = () => {
       body: JSON.stringify(recipeInfo),
     })
       .then((res) => {
-          console.log(res)
+        console.log(res)
       })
+      // navigate('/Home')
   }
 
   return (
-    <div>
+    <Form>
       <h2> Add Recipe </h2>
       <form>
-        <div>
+      <InputGroup className="mb-3">
           <label htmlFor='title'>Title: </label>
-          <input
+          <Form.Control
             ref={title}
             type="text"
             id="title"
             name="title"
             placeholder="Recipe Name"
-          />
-        </div>
+          ></Form.Control>
+        </InputGroup>
         <div>
-          <input placeholder="Picture" id="pic" name="pic" />
+        <Form.Control placeholder="Picture" id="pic" name="pic"></Form.Control>
         </div>
         <div>
           <label htmlFor='description'>Description: </label>
@@ -121,7 +128,7 @@ const AddRecipe = () => {
           </button>
         </div>
       </form>
-    </div>
+    </Form>
   );
 };
 

@@ -59,7 +59,7 @@ const EditRecipe = () => {
 
   return (
     <div>
-      <h2> Add Recipe </h2>
+      <h2> Edit Recipe </h2>
       <form>
         <div>
           <label htmlFor='title'>Title: </label>

@@ -1,7 +1,11 @@
-.loginBtn{
+.loginBtn {
       padding: 10px;
-    margin:2px;
+      margin:2px;
 }
+.loginBtn:hover {
+    background-color: rgb(129, 229, 129);
+    border-radius: 4px;
+  }
 /* .signupBtn{
   
     padding: 10px;
@@ -17,3 +21,7 @@
     padding: 10px;
     margin:2px;
 }
+.searchBtn:hover {
+    background-color: rgb(129, 229, 129);
+    border-radius: 4px;
+  }

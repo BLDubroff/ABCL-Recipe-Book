@@ -3,6 +3,7 @@ import ShowRecipe from "./recipes/showRecipe";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ServerContext from "../Features/ServerContext";
+import AddRecipe from "./recipes/addRecipe";
 
 
 export default function Home() {
@@ -24,6 +25,18 @@ export default function Home() {
 
   return (
     <div>
+      <nav>
+              <ul>
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="/addRecipe">Add Recipe</a>
+                </li>
+              
+              </ul>
+            </nav>
+      
       {loading ? 'Loading' : ''}
       {recipes.map(recipe => ShowRecipe(recipe))}
     </div>
