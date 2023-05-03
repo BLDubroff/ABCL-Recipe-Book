@@ -34,7 +34,7 @@ function SignupForm() {
                 if (body.data) {
                     console.log(body)
                     setLoggedIn(true)
-                    setUserId(body.data.user_id)
+                    //setUserId(body.data.user_id)
                     setUsername(body.data.username)
                     navigate('/')
                 } else {
