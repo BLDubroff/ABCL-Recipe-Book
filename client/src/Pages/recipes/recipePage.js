@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ServerContext from "../../Features/ServerContext";
 import axios from "axios";
-import './show.css'
+import "./show.css";
 
 const RecipePage = () => {
   const { serverURL } = useContext(ServerContext);
@@ -23,6 +23,11 @@ const RecipePage = () => {
 
   return (
     <div key={recipe_data.recipe_id}>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+      </ul>{" "}
       <div>
         <h4>Recipe</h4>
         <h1>{recipe_data.title}</h1>
@@ -50,7 +55,12 @@ const RecipePage = () => {
             {recipe_data.servings}
           </p>
           <div>
-            <a  className="editBtn" href={`/editRecipe/:recipe_id${recipe_data.recipe_id}`}>Edit</a>
+            <a
+              className="editBtn"
+              href={`/editRecipe/:recipe_id${recipe_data.recipe_id}`}
+            >
+              Edit
+            </a>
           </div>
           <div>
             <form

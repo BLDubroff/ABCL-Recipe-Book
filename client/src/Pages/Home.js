@@ -25,20 +25,18 @@ export default function Home() {
 
   return (
     <div>
+      
+      {loading ? 'Loading' : ''}
+      {recipes.map(recipe => ShowRecipe(recipe))}
       <nav>
               <ul>
-                <li>
-                  <a href="/">Home</a>
-                </li>
+              
                 <li>
                   <a href="/addRecipe">Add Recipe</a>
                 </li>
               
               </ul>
             </nav>
-      
-      {loading ? 'Loading' : ''}
-      {recipes.map(recipe => ShowRecipe(recipe))}
     </div>
   );
 }
