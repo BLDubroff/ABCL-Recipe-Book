@@ -6,8 +6,24 @@
 } */
 .linkRecipe{
      text-decoration: none;
+     color: rgb(91, 60, 3);
+     
 }
 .recipeShow{
     width:100%;
     
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 10px
+}
+.cardContainer{
+    padding: 10px
+}
+
+.addBtn {
+    text-align: left;
 }
