@@ -1,22 +1,25 @@
 import AccountContext from "../Features/AccountContext";
 import { useContext, useRef } from "react"
 import { useNavigate } from "react-router-dom"
-
-const serverURL = process.env.REACT_APP_SERVER_URL
+import ServerContext from "../Features/ServerContext";
 
 function SignupForm() {
 
     const navigate = useNavigate();
 
-    const {setLoggedIn, setUsername} = useContext(AccountContext)
+    const { setLoggedIn, setUsername } = useContext(AccountContext);
+    const { serverURL } = useContext(ServerContext);
 
     const username = useRef('')
     const password = useRef('')
 
     const handleSubmit = async (e, username, password) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const userInfo = JSON.stringify({username: username, password: password})
+        const userInfo = JSON.stringify({
+            username: username, 
+            password: password
+        })
 
         fetch(`${serverURL}/users`, {
             method: 'POST',
@@ -26,11 +29,20 @@ function SignupForm() {
             },
             body: userInfo,
         })
-            .then((res) => {
-                console.log(res)
-                setLoggedIn(true);
-                setUsername(username);
-                navigate('/')
+            .then(res => res.json())
+            .then(body => {
+                if (body.data) {
+                    console.log(body)
+                    setLoggedIn(true)
+                    setUserId(body.data.user_id)
+                    setUsername(body.data.username)
+                    navigate('/')
+                } else {
+                    body.errors.forEach(err => {
+                        console.log(`ERROR TYPE - ${err.type}: ${err.message}`)
+                    })
+                }
+
             })
 
     }
