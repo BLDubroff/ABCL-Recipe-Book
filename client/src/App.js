@@ -13,6 +13,8 @@ import ShowRecipe from "./Pages/recipes/showRecipe";
 import ServerContext from "./Features/ServerContext";
 import RecipePage from "./Pages/recipes/recipePage";
 
+import './App.css'
+
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false)

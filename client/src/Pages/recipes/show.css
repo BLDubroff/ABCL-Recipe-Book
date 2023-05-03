@@ -1,6 +1,13 @@
-.editBtn{
+/* .editBtn{
     border: 1px solid black;
     text-decoration: none;
     padding: 3px;
     border-radius: 2px;
+} */
+.linkRecipe{
+     text-decoration: none;
+}
+.recipeShow{
+    width:100%;
+    
 }

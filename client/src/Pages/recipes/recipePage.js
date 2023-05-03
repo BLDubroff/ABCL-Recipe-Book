@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ServerContext from "../../Features/ServerContext";
 import axios from "axios";
 import "./show.css";
+import Button from "react-bootstrap/Button";
 
 const RecipePage = () => {
   const { serverURL } = useContext(ServerContext);
@@ -23,11 +24,11 @@ const RecipePage = () => {
 
   return (
     <div key={recipe_data.recipe_id}>
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-      </ul>{" "}
+      <div>
+        <Button variant="outline-secondary" href="/">
+          Home
+        </Button>
+      </div>
       <div>
         <h4>Recipe</h4>
         <h1>{recipe_data.title}</h1>
@@ -55,23 +56,24 @@ const RecipePage = () => {
             {recipe_data.servings}
           </p>
           <div>
-            <a
+            <Button
+              variant="outline-secondary"
               className="editBtn"
               href={`/editRecipe/:recipe_id${recipe_data.recipe_id}`}
             >
               Edit
-            </a>
+            </Button>
           </div>
           <div>
             <form
               method="POST"
               action={`/recipe/${recipe_data.recipe_id}?_method=DELETE`}
             >
-              <input
+              <Button
                 type="submit"
-                className="btn btn-danger"
+                variant="outline-danger"
                 value="Delete Recipe"
-              />
+              >Delete</Button>
             </form>
           </div>
         </div>
