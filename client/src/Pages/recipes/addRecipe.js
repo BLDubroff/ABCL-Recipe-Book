@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useRef  } from "react";
+import React, { useContext, useRef  } from "react";
+import { useNavigate } from "react-router-dom";
 import ServerContext from "../../Features/ServerContext";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -16,7 +17,7 @@ const AddRecipe = (props) => {
   const tags = useRef('');
   
   const { serverURL } = useContext(ServerContext)
-  // const navigate = useEffect();
+  const navigate = useNavigate();
 
   const handleAdd = (e, recipeInfo) => {
 
@@ -34,8 +35,8 @@ const AddRecipe = (props) => {
     })
       .then((res) => {
         console.log(res)
+        navigate('/')
       })
-      // navigate('/Home')
   }
 
   return (
