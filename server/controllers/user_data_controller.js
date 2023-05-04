@@ -47,11 +47,25 @@ user.get('/:id', async (req, res) => {
 user.post('/', async (req, res) => {
     try {
         const newUser = await User_data.create(req.body)
-        res.status(200).json({
-            message: 'Successfully inserted a new user',
-            data: newUser
-        })
+        const sessionToken = await Authentication.createCookie(newUser.user_id)
+
+        res.statusCode = 200
+        res.setHeader('Set-Cookie', [
+            cookie.serialize('session_token', sessionToken.session_token, {
+                secure: true,
+                httpOnly: true,
+                path: '/'
+            }),
+            cookie.serialize('user_id', newUser.user_id, {
+                secure: true,
+                httpOnly: true,
+                path: '/'
+            })
+        ])
+        res.json(newUser)
+        res.end()
     } catch(err) {
+        console.log(err)
         res.status(500).json(err)
     }
 })
