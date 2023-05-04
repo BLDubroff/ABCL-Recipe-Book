@@ -1,17 +1,20 @@
-import { Link } from "react-router-dom"
-import './Navbarbuttons.css'
+import { Link } from "react-router-dom";
+import "./Navbarbuttons.css";
+import Button from "react-bootstrap/Button";
 
 function UserProfile(props) {
-
-    return (
-        <h3>
-            <Link className="userName" to='/profile'>
-                User: {props.username}
-            </Link>
-        </h3>
-    )
-
-
+  return (
+    <h3 className="logBtns">
+      <Link className="userName" to="/profile">
+        <Button variant="outline-secondary"> User: {props.username}</Button>
+      </Link>
+      {/* <div style={{ textAlign: "right" }}> */}
+      <Button className="addbtn" variant="outline-secondary" href="/addRecipe">
+        Add Recipe
+      </Button>
+      {/* </div> */}
+    </h3>
+  );
 }
 
-export default UserProfile
+export default UserProfile;

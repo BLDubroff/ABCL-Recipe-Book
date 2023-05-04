@@ -1,15 +1,13 @@
-import LoginForm from "./LoginForm"
-import SignupForm from "./SignupForm"
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
 
 function LoginSignupPage() {
-
-    return (
-        <>
-            <LoginForm />
-            <SignupForm />
-        </>
-    )
-
+  return (
+    <>
+      <LoginForm />
+      <SignupForm />
+    </>
+  );
 }
 
-export default LoginSignupPage
+export default LoginSignupPage;

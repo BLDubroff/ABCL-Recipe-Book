@@ -23,27 +23,25 @@ const RecipePage = () => {
   }, []);
 
   const handleDelete = (e) => {
-
     e.preventDefault();
 
     fetch(`${serverURL}/recipes/${recipe_id}`, {
-      method: 'DELETE',
-      mode: 'cors',
+      method: "DELETE",
+      mode: "cors",
       headers: {
-          "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
-      credentials: 'include'
-    })
-      .then((res) => {
-        console.log(res)
-      })
-  }
+      credentials: "include",
+    }).then((res) => {
+      console.log(res);
+    });
+  };
 
   return (
-    <div className="container" key={recipe_data.recipe_id}>
+    <div className="container-recipe" key={recipe_data.recipe_id}>
       <div>
         <h1>{recipe_data.title}</h1>
-        <h2>By: {recipe_data.author ? recipe_data.author.username : ''}</h2>
+        <h2>By: {recipe_data.author ? recipe_data.author.username : ""}</h2>
       </div>
       <div>
         <img src={recipe_data.img} alt={recipe_data.name} />
@@ -68,15 +66,22 @@ const RecipePage = () => {
             {recipe_data.servings}
           </p>
           <div className="editBtn">
-            <Button variant="outline-secondary" href={`/editRecipe/${recipe_data.recipe_id}`}>Edit</Button>
+            <Button
+              variant="outline-secondary"
+              href={`/editRecipe/${recipe_data.recipe_id}`}
+            >
+              Edit
+            </Button>
           </div>
           <Button
-                className="deleteBtn"
-                type="submit"
-                variant="outline-danger"
-                value="Delete Recipe"
-                onClick={handleDelete}
-              >Delete</Button>
+            className="deleteBtn"
+            type="submit"
+            variant="outline-danger"
+            value="Delete Recipe"
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
         </div>
       </div>
     </div>

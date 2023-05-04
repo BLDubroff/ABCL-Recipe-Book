@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Navbarbuttons.css";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
 function LoginButton() {
   return (
@@ -9,9 +9,6 @@ function LoginButton() {
         <Button className="loginBtn" variant="outline-secondary" size="lg">
           Log In / Sign Up
         </Button>
-        {/* <Button className="signupBtn" variant="success" size="lg">
-          Sign UP
-        </Button> */}
       </Link>
     </h3>
   );

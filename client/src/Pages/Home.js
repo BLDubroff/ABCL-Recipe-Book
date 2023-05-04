@@ -24,14 +24,8 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ textAlign: "right" }}>
-        <Button variant="outline-secondary" href="/addRecipe">
-          Add Recipe
-        </Button>
-      </div>
       <div className="cardContainer">
         {loading ? "Loading" : ""}
-
         {recipes.map((recipe) => ShowRecipe(recipe))}
       </div>
     </div>

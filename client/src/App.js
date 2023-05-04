@@ -13,30 +13,32 @@ import ShowRecipe from "./Pages/recipes/showRecipe";
 import ServerContext from "./Features/ServerContext";
 import RecipePage from "./Pages/recipes/recipePage";
 
-import './App.css'
+import "./App.css";
 
 function App() {
-
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [user_id, setUserId] = useState(null)
-  const [username, setUsername] = useState('')
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user_id, setUserId] = useState(null);
+  const [username, setUsername] = useState("");
 
   return (
-    <ServerContext.Provider value={{
-      serverURL: process.env.REACT_APP_SERVER_URL
-    }}>
-      <AccountContext.Provider value={{
-        loggedIn, 
-        setLoggedIn,
-        user_id,
-        setUserId,
-        username,
-        setUsername
-      }}>
-      <BrowserRouter>
-      <Navbar />
-        <Routes>
-
+    <ServerContext.Provider
+      value={{
+        serverURL: process.env.REACT_APP_SERVER_URL,
+      }}
+    >
+      <AccountContext.Provider
+        value={{
+          loggedIn,
+          setLoggedIn,
+          user_id,
+          setUserId,
+          username,
+          setUsername,
+        }}
+      >
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
             <Route path="/" element={<Home />} />
 
             <Route path="/addRecipe" element={<AddRecipe />} />
@@ -48,12 +50,10 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
 
             <Route path="/login" element={<LoginSignupPage />} />
-            
           </Routes>
         </BrowserRouter>
       </AccountContext.Provider>
     </ServerContext.Provider>
-    
   );
 }
 
