@@ -1,0 +1,10 @@
+input{
+  padding: 10px; 
+  flex-direction: column; 
+  display: flex;
+  border-radius: 5px;
+  width: 400px;
+}
+button:hover{
+    background-color: rgb(115, 187, 115);
+}

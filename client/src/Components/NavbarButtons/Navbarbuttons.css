@@ -2,15 +2,6 @@
       padding: 10px;
       margin:2px;
 }
-.loginBtn:hover {
-    background-color: rgb(129, 229, 129);
-    border-radius: 4px;
-  }
-/* .signupBtn{
-  
-    padding: 10px;
-    margin:2px;
-} */
 
 .searchBar{
     width: 20em;
@@ -21,7 +12,4 @@
     padding: 10px;
     margin:2px;
 }
-.searchBtn:hover {
-    background-color: rgb(129, 229, 129);
-    border-radius: 4px;
-  }
+
