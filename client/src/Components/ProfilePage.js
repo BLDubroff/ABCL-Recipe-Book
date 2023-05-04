@@ -1,15 +1,31 @@
 import { useContext, useEffect } from "react"
-import AccountContext from "../Features/AccountContext"
 import { useNavigate } from "react-router-dom";
+import AccountContext from "../Features/AccountContext"
+import ServerContext from "../Features/ServerContext";
 
 function ProfilePage() {
 
     const navigate = useNavigate();
 
-    const {loggedIn, setLoggedIn, username} = useContext(AccountContext);
+    const { loggedIn, setLoggedIn, username, user_id } = useContext(AccountContext);
+    const { serverURL } = useContext(ServerContext)
 
-    const handleLogOut = (e) => {
-        setLoggedIn(false);
+    const handleLogOut = () => {
+        fetch(`${serverURL}/users/logout/${user_id}`, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(body => {
+                console.log(body)
+            })
+
+        setLoggedIn(false)
+
         navigate('/')
     }
 

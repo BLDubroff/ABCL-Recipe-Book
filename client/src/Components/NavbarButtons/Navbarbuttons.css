@@ -1,12 +1,7 @@
-.loginBtn{
+.loginBtn {
       padding: 10px;
-    margin:2px;
+      margin:2px;
 }
-/* .signupBtn{
-  
-    padding: 10px;
-    margin:2px;
-} */
 
 .searchBar{
     width: 20em;
@@ -17,3 +12,4 @@
     padding: 10px;
     margin:2px;
 }
+

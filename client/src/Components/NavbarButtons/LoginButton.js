@@ -6,7 +6,7 @@ function LoginButton() {
   return (
     <h3>
       <Link to={"/login"}>
-        <Button className="loginBtn" variant="link" size="lg">
+        <Button className="loginBtn" variant="outline-secondary" size="lg">
           Log In / Sign Up
         </Button>
         {/* <Button className="signupBtn" variant="success" size="lg">

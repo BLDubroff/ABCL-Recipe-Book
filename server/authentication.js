@@ -35,14 +35,44 @@ class Authentication {
     }
 
     static async confirmToken(user_id, session_token) {
-        const session = Session_cookies.findOne({
+        const session = await Session_cookies.findOne({
             where: {
                 user_id: user_id,
-                session_token
+                session_token: session_token
             }
         })
 
-        return session !== null
+        console.log("FOUND SESSION:")
+        console.log(session)
+        console.log(session !== null)
+        console.log("END SESSION")
+
+        return (session !== null)
+    }
+
+    static async logout(user_id, session_token) {
+        const session = Session_cookies.findOne({
+            where: {
+                user_id: user_id,
+                session_token: session_token
+            }
+        })
+
+        if (session !== null) {
+            Session_cookies.destroy({
+                where: {
+                    user_id: user_id
+                }
+            })
+        }
+    }
+
+    static async viewSessionTokens() {
+        const foundTokens = Session_cookies.findAll({
+            order: [ [ 'user_id', 'ASC'] ],
+        })
+
+        return foundTokens
     }
 }
 

@@ -60,6 +60,7 @@ function LoginForm() {
 
     return (
         <>
+        <h2>Log In</h2>
             <form>
                 <label htmlFor="username">Username: </label>
                 <input ref={username} id="username" name="username" type="text" />

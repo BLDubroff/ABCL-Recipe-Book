@@ -1,0 +1,23 @@
+
+.linkRecipe{
+     text-decoration: none;
+     color: rgb(47, 31, 2);
+     
+}
+
+.containerr {   
+   width: 30rem;
+   flex-wrap: wrap;    
+   flex-direction: row important;  
+   padding: 10px;  
+  }
+  
+.cardContainer{
+   background-color: aqua;
+   padding: 10px;
+}
+
+.addBtn {
+    text-align: left;
+}
+

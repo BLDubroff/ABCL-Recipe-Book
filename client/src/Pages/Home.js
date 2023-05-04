@@ -3,10 +3,10 @@ import ShowRecipe from "./recipes/showRecipe";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ServerContext from "../Features/ServerContext";
-
+import Button from "react-bootstrap/Button";
+import '../Pages/recipes/show.css'
 
 export default function Home() {
-
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,8 +24,10 @@ export default function Home() {
 
   return (
     <div>
-      {loading ? 'Loading' : ''}
-      {recipes.map(recipe => ShowRecipe(recipe))}
+      <Button className="addBtn" variant="outline-secondary" href="/addRecipe">Add Recipe</Button>
+      {loading ? "Loading" : ""}
+      {recipes.map((recipe) => ShowRecipe(recipe))}
+
     </div>
   );
 }

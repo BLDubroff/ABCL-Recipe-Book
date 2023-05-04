@@ -1,16 +1,11 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { useState } from "react";
-import axios from "axios";
+import React, { useContext, useEffect, useRef  } from "react";
 import ServerContext from "../../Features/ServerContext";
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import "./addRecipe.css"
+
 
 const AddRecipe = (props) => {
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [recipeContent, setContent] = useState("");
-  // const [cookTime, setCookTime] = useState(0);
-  // const [prepTime, setPrepTIme] = useState(0);
-  // const [totalTime, setTotalTime] = useState(0);
-  // const [servings, setServings] = useState(0);
 
   const title = useRef('');
   const description = useRef('');
@@ -21,18 +16,12 @@ const AddRecipe = (props) => {
   const tags = useRef('');
   
   const { serverURL } = useContext(ServerContext)
-
-  //const { handleAdd } = props;
-
-  // useEffect(() => {
-  //   axios.get(`${serverURL}/recipes`).then((response) => {
-  //     setTitle(response.data);
-  //   });
-  // });
+  // const navigate = useEffect();
 
   const handleAdd = (e, recipeInfo) => {
 
     e.preventDefault();
+    
 
     fetch(`${serverURL}/recipes`, {
       method: 'POST',
@@ -44,26 +33,27 @@ const AddRecipe = (props) => {
       body: JSON.stringify(recipeInfo),
     })
       .then((res) => {
-          console.log(res)
+        console.log(res)
       })
+      // navigate('/Home')
   }
 
   return (
-    <div>
-      <h2> Add Recipe </h2>
+    <Form>
+      <h2 > Add Recipe </h2>
       <form>
-        <div>
+      <InputGroup className="mb-3">
           <label htmlFor='title'>Title: </label>
-          <input
+          <Form.Control
             ref={title}
             type="text"
             id="title"
             name="title"
             placeholder="Recipe Name"
-          />
-        </div>
+          ></Form.Control>
+        </InputGroup>
         <div>
-          <input placeholder="Picture" id="pic" name="pic" />
+        <Form.Control placeholder="Picture" id="pic" name="pic"></Form.Control>
         </div>
         <div>
           <label htmlFor='description'>Description: </label>
@@ -138,7 +128,8 @@ const AddRecipe = (props) => {
           </button>
         </div>
       </form>
-    </div>
+    </Form>
   );
 };
+
 export default AddRecipe;

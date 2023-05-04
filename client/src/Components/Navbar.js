@@ -35,7 +35,7 @@ function Navbar() {
     return (
         <div id="navbar">
             <HomeButton />
-            < SearchBar />
+            <SearchBar />
             <AccountButton />
         </div>
     )

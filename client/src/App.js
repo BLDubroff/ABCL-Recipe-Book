@@ -11,6 +11,9 @@ import AddRecipe from "./Pages/recipes/addRecipe";
 import EditRecipe from "./Pages/recipes/editRecipe";
 import ShowRecipe from "./Pages/recipes/showRecipe";
 import ServerContext from "./Features/ServerContext";
+import RecipePage from "./Pages/recipes/recipePage";
+
+import './App.css'
 
 function App() {
 
@@ -38,9 +41,9 @@ function App() {
 
             <Route path="/addRecipe" element={<AddRecipe />} />
 
-            <Route path="/editRecipe" element={<EditRecipe />} />
+            <Route path="/editRecipe/:recipe_id" element={<EditRecipe />} />
 
-            <Route path="/recipes" element={< ShowRecipe/>} />
+            <Route path="/recipe/:recipe_id" element={<RecipePage />} />
 
             <Route path="/profile" element={<ProfilePage />} />
 

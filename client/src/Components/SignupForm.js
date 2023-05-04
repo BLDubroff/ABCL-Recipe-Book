@@ -7,7 +7,7 @@ function SignupForm() {
 
     const navigate = useNavigate();
 
-    const { setLoggedIn, setUsername } = useContext(AccountContext);
+    const { setLoggedIn, setUsername, setUserId } = useContext(AccountContext);
     const { serverURL } = useContext(ServerContext);
 
     const username = useRef('')
@@ -34,7 +34,7 @@ function SignupForm() {
                 if (body.data) {
                     console.log(body)
                     setLoggedIn(true)
-                    setUserId(body.data.user_id)
+                    //setUserId(body.data.user_id)
                     setUsername(body.data.username)
                     navigate('/')
                 } else {
