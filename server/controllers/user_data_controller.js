@@ -119,7 +119,7 @@ user.post('/session/view', async (req, res) => {
 
 user.post('/session', async (req, res) => {
     try {
-        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+        const { user_id, session_token } = cookie.parse(req.headers.cookie + '')
 
         if (user_id === undefined || session_token === undefined) {
             res.status(200).json({user_id: null})

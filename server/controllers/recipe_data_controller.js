@@ -26,8 +26,9 @@ recipes.get('/', async (req, res) => {
             ]
         })
         res.status(200).json(foundRecipes)
-    } catch (error) {
-        res.status(500).json(error)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
     }
 })
 
@@ -50,7 +51,17 @@ recipes.get('/search', async (req, res) => {
 recipes.get('/show/:id', async (req, res) => {
     try {
         const foundRecipe = await Recipe_data.findOne({
-            where: { recipe_id: req.params.id }
+            where: { recipe_id: req.params.id },
+            include: [
+                {
+                    model: User_data,
+                    as: 'author'
+                },
+                {
+                    model: Rating_reviews,
+                    as: 'reviews'
+                }
+            ]
         })
         res.status(200).json(foundRecipe)
     } catch (error) {
@@ -62,7 +73,7 @@ recipes.get('/show/:id', async (req, res) => {
 recipes.post('/', async (req, res) => {
     try {
 
-        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+        const { user_id, session_token } = cookie.parse(req.headers.cookie + '')
 
         if (user_id === undefined || session_token === undefined) {
             res.status(401).json({recipe_id: null})
@@ -102,8 +113,7 @@ recipes.post('/', async (req, res) => {
 // UPDATE A RECIPE
 recipes.put('/:id', async (req, res) => {
     try {
-
-        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+        const { user_id, session_token } = cookie.parse(req.headers.cookie + '')
 
         if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
             res.status(401).json({recipe_id: null})
@@ -147,7 +157,8 @@ recipes.put('/:id', async (req, res) => {
 // DELETE A RECIPE
 recipes.delete('/:id', async (req, res) => {
     try {
-        const { user_id, session_token } = cookie.parse(req.headers.cookie)
+
+        const { user_id, session_token } = cookie.parse(req.headers.cookie + '')
 
         if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
             res.status(401).json({recipe_id: null})
@@ -167,6 +178,7 @@ recipes.delete('/:id', async (req, res) => {
             res.status(401).json({recipe_id: null})
         }
     } catch(err) {
+        console.log(err)
         res.status(500).json(err)
     }
 })

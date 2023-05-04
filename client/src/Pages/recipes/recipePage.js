@@ -22,16 +22,28 @@ const RecipePage = () => {
     retrieveRecipe();
   }, []);
 
+  const handleDelete = (e) => {
+
+    e.preventDefault();
+
+    fetch(`${serverURL}/recipes/${recipe_id}`, {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      credentials: 'include'
+    })
+      .then((res) => {
+        console.log(res)
+      })
+  }
+
   return (
     <div key={recipe_data.recipe_id}>
       <div>
-        <Button variant="outline-secondary" href="/">
-          Home
-        </Button>
-      </div>
-      <div>
-        <h4>Recipe</h4>
         <h1>{recipe_data.title}</h1>
+        <h2>By: {recipe_data.author ? recipe_data.author.username : ''}</h2>
       </div>
       <div>
         <img src={recipe_data.img} alt={recipe_data.name} />
@@ -56,26 +68,14 @@ const RecipePage = () => {
             {recipe_data.servings}
           </p>
           <div>
-            <Button
-              variant="outline-secondary"
-              className="editBtn"
-              href={`/editRecipe/:recipe_id${recipe_data.recipe_id}`}
-            >
-              Edit
-            </Button>
+            <a  className="editBtn" href={`/editRecipe/${recipe_data.recipe_id}`}>Edit</a>
           </div>
-          <div>
-            <form
-              method="POST"
-              action={`/recipe/${recipe_data.recipe_id}?_method=DELETE`}
-            >
-              <Button
+          <input
                 type="submit"
                 variant="outline-danger"
                 value="Delete Recipe"
-              >Delete</Button>
-            </form>
-          </div>
+                onClick={handleDelete}
+              />
         </div>
       </div>
     </div>
