@@ -5,19 +5,40 @@
      
 }
 
-.containerr {   
-   width: 30rem;
-   flex-wrap: wrap;    
-   flex-direction: row important;  
-   padding: 10px;  
-  }
-  
-.cardContainer{
-   background-color: aqua;
-   padding: 10px;
+.container{
+    padding: 30px;
+    text-align: justify;
+    
 }
 
-.addBtn {
-    text-align: left;
+.editBtn{
+    display: flex;
+    text-align: right;
 }
+.deleteBtn{
+    text-align: right;
+}
+
+
+
+.cardContainer{
+   
+    display: flex;
+   flex: space-between;
+   padding: 20px;
+   flex-direction: row;
+   flex: wrap;
+   
+}
+
+
+@media (max-width: 800px) {
+    .cardContainer {
+        display: flex;
+      flex-direction: column;
+      
+    }
+  }
+
+
 

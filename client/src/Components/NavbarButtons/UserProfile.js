@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
+import './Navbarbuttons.css'
 
 function UserProfile(props) {
 
     return (
         <h3>
-            <Link to='/profile'>
+            <Link className="userName" to='/profile'>
                 User: {props.username}
             </Link>
         </h3>

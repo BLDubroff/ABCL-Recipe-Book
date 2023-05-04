@@ -40,7 +40,7 @@ const RecipePage = () => {
   }
 
   return (
-    <div key={recipe_data.recipe_id}>
+    <div className="container" key={recipe_data.recipe_id}>
       <div>
         <h1>{recipe_data.title}</h1>
         <h2>By: {recipe_data.author ? recipe_data.author.username : ''}</h2>
@@ -67,15 +67,16 @@ const RecipePage = () => {
             Servings:
             {recipe_data.servings}
           </p>
-          <div>
-            <a  className="editBtn" href={`/editRecipe/${recipe_data.recipe_id}`}>Edit</a>
+          <div className="editBtn">
+            <Button variant="outline-secondary" href={`/editRecipe/${recipe_data.recipe_id}`}>Edit</Button>
           </div>
-          <input
+          <Button
+                className="deleteBtn"
                 type="submit"
                 variant="outline-danger"
                 value="Delete Recipe"
                 onClick={handleDelete}
-              />
+              >Delete</Button>
         </div>
       </div>
     </div>

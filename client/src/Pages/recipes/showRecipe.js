@@ -5,12 +5,11 @@ import { Card, ListGroup, Row, Col } from "react-bootstrap";
 
 const ShowRecipe = (recipe_data) => {
   return (
-    <Row xs={1} md={2} className="g-4">
-      {/* {Array.from({ length: 4 }).map((_, idx) => (
-        <Col key={idx}> */}
+    
+    <Row xs={1} md={2} className="container g-4">
+     
       <Card
-        className="cardContainer"
-        style={{ width: "20rem" }}
+        // className="cardContainer"
         key={recipe_data.recipe_id}
       >
         <div>

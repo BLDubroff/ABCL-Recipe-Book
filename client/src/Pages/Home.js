@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ServerContext from "../Features/ServerContext";
 import Button from "react-bootstrap/Button";
-import '../Pages/recipes/show.css'
+import "../Pages/recipes/show.css";
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -24,10 +24,16 @@ export default function Home() {
 
   return (
     <div>
-      <Button className="addBtn" variant="outline-secondary" href="/addRecipe">Add Recipe</Button>
-      {loading ? "Loading" : ""}
-      {recipes.map((recipe) => ShowRecipe(recipe))}
+      <div style={{ textAlign: "right" }}>
+        <Button variant="outline-secondary" href="/addRecipe">
+          Add Recipe
+        </Button>
+      </div>
+      <div className="cardContainer">
+        {loading ? "Loading" : ""}
 
+        {recipes.map((recipe) => ShowRecipe(recipe))}
+      </div>
     </div>
   );
 }
