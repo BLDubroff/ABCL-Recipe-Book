@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef  } from "react";
 import ServerContext from "../../Features/ServerContext";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-
+import "./addRecipe.css"
 
 
 const AddRecipe = (props) => {
@@ -40,7 +40,7 @@ const AddRecipe = (props) => {
 
   return (
     <Form>
-      <h2> Add Recipe </h2>
+      <h2 > Add Recipe </h2>
       <form>
       <InputGroup className="mb-3">
           <label htmlFor='title'>Title: </label>

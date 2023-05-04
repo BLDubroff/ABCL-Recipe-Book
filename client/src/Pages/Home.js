@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* <Button className="addBtn" variant="outline-secondary" href="/addRecipe">Add Recipe</Button> */}
+      <Button className="addBtn" variant="outline-secondary" href="/addRecipe">Add Recipe</Button>
       {loading ? "Loading" : ""}
       {recipes.map((recipe) => ShowRecipe(recipe))}
 
