@@ -2,6 +2,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const { Sequelize } = require('sequelize')
 const usersController = require('./controllers/user_data_controller')
 const recipesController = require('./controllers/recipe_data_controller')
 const reviewsController = require('./controllers/rating_reviews_controller')
