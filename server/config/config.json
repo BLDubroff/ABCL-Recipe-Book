@@ -1,10 +1,16 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "root",
-    "database": "abcl_recipe_book",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "default",
+    "password": "iU5VdCm9prav",
+    "database": "verceldb",
+    "host": "ep-restless-smoke-284901-pooler.us-east-1.postgres.vercel-storage.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "postgres",
