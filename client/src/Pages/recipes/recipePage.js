@@ -36,6 +36,7 @@ const RecipePage = () => {
     })
       .then((res) => {
         console.log(res)
+        navigate('/')
       })
   }
 

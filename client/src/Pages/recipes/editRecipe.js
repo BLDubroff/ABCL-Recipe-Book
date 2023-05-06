@@ -61,6 +61,7 @@ const EditRecipe = () => {
     })
       .then((res) => {
           console.log(res)
+          navigate('/')
       })
   }
 
