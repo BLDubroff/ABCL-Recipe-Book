@@ -75,12 +75,14 @@ user.post('/login', async (req, res) => {
                 cookie.serialize('session_token', sessionToken.session_token, {
                     secure: true,
                     httpOnly: true,
-                    path: '/'
+                    path: '/',
+                    sameSite: 'None'
                 }),
                 cookie.serialize('user_id', foundUser.user_id, {
                     secure: true,
                     httpOnly: true,
-                    path: '/'
+                    path: '/',
+                    sameSite: 'None'
                 })
             ])
             res.json(foundUser)
