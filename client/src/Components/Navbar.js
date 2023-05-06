@@ -5,6 +5,7 @@ import HomeButton from './NavbarButtons/HomeButton'
 import SearchBar from './NavbarButtons/SearchBar'
 import ServerContext from '../Features/ServerContext'
 import AccountContext from '../Features/AccountContext'
+import AddRecipeButton from './NavbarButtons/AddRecipeButton'
 
 function Navbar() {
 
@@ -36,6 +37,7 @@ function Navbar() {
         <div id="navbar">
             <HomeButton />
             <SearchBar />
+            <AddRecipeButton />
             <AccountButton />
         </div>
     )

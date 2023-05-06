@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ServerContext from "../../Features/ServerContext";
 import axios from "axios";
 import "./show.css";
@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 const RecipePage = () => {
   const { serverURL } = useContext(ServerContext);
   const { recipe_id } = useParams();
+  const navigate = useNavigate();
 
   const [recipe_data, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,7 @@ const RecipePage = () => {
     })
       .then((res) => {
         console.log(res)
+        navigate('/')
       })
   }
 

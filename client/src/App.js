@@ -9,9 +9,9 @@ import LoginSignupPage from "./Components/LoginSignupPage";
 import Home from "./Pages/Home";
 import AddRecipe from "./Pages/recipes/addRecipe";
 import EditRecipe from "./Pages/recipes/editRecipe";
-import ShowRecipe from "./Pages/recipes/showRecipe";
 import ServerContext from "./Features/ServerContext";
 import RecipePage from "./Pages/recipes/recipePage";
+import SearchPage from "./Pages/SearchPage";
 
 import './App.css'
 
@@ -48,6 +48,8 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
 
             <Route path="/login" element={<LoginSignupPage />} />
+
+            <Route path="/search" element={<SearchPage />} />
             
           </Routes>
         </BrowserRouter>
