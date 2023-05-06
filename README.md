@@ -8,6 +8,8 @@ Recipe Book is a page that lets you create, read, edit, and delete a recipe with
 Upload a picture of a recipe with its Title and Description fields; it
 also contains a list of preparation timing for the recipe that you wish to create.
 
+Search for recipes based on tags; enter tags into the search bar for list of recipes that match all tags entered.
+
 *For further features improvements the goal is to set comments rating will be added and better css styling (mobile compatible)*
 
 ----------------------------------------------------------------
