@@ -71,6 +71,10 @@ const RecipePage = () => {
             Servings:
             {recipe_data.servings}
           </p>
+          <p>
+            Tags:
+            {recipe_data.tags.join(',')}
+          </p>
           {user_id === recipe_data.user_id ? 
             <>
               <div>
