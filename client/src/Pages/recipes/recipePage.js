@@ -4,9 +4,11 @@ import ServerContext from "../../Features/ServerContext";
 import axios from "axios";
 import "./show.css";
 import Button from "react-bootstrap/Button";
+import AccountContext from "../../Features/AccountContext";
 
 const RecipePage = () => {
   const { serverURL } = useContext(ServerContext);
+  const { user_id } = useContext(AccountContext);
   const { recipe_id } = useParams();
   const navigate = useNavigate();
 
@@ -69,15 +71,20 @@ const RecipePage = () => {
             Servings:
             {recipe_data.servings}
           </p>
-          <div>
-            <a  className="editBtn" href={`/editRecipe/${recipe_data.recipe_id}`}>Edit</a>
-          </div>
-          <input
+          {user_id === recipe_data.user_id ? 
+            <>
+              <div>
+                <a className="editBtn" href={`/editRecipe/${recipe_data.recipe_id}`}>Edit</a>
+              </div>
+              <input
                 type="submit"
                 variant="outline-danger"
                 value="Delete Recipe"
-                onClick={handleDelete}
-              />
+                onClick={handleDelete} 
+                />
+              </> : 
+              <></>
+          }
         </div>
       </div>
     </div>
