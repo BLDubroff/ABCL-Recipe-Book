@@ -125,12 +125,19 @@ recipes.put('/:id', async (req, res) => {
     try {
         const { user_id, session_token } = cookie.parse(req.headers.cookie + '')
 
-        if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
+        if (user_id === undefined || session_token === undefined) {
             res.status(401).json({recipe_id: null})
             return
         }
 
-        if (await Authentication.confirmToken(parseInt(user_id), session_token)) {
+        const recipeToUpdate = await Recipe_data.findOne({
+            where: {
+                recipe_id: req.params.id,
+                user_id: user_id
+            }
+        })
+
+        if (await Authentication.confirmToken(parseInt(user_id), session_token) && recipeToUpdate) {
 
             const recipeInfo = {
                 user_id: user_id,
@@ -170,12 +177,19 @@ recipes.delete('/:id', async (req, res) => {
 
         const { user_id, session_token } = cookie.parse(req.headers.cookie + '')
 
-        if (user_id === undefined || session_token === undefined || user_id !== req.params.id) {
+        if (user_id === undefined || session_token === undefined) {
             res.status(401).json({recipe_id: null})
             return
         }
 
-        if (await Authentication.confirmToken(parseInt(user_id), session_token)) {
+        const recipeToDelete = await Recipe_data.findOne({
+            where: {
+                recipe_id: req.params.id,
+                user_id: user_id
+            }
+        })
+
+        if (await Authentication.confirmToken(parseInt(user_id), session_token) && recipeToDelete !== null) {
             const deletedRecipe = await Recipe_data.destroy({
                 where: {
                     recipe_id: req.params.id
@@ -185,7 +199,7 @@ recipes.delete('/:id', async (req, res) => {
                 message: `Successfully deleted ${deletedRecipe} recipe(s)`
             })
         } else {
-            res.status(401).json({recipe_id: null})
+            res.status(403).json({recipe_id: null})
         }
     } catch(err) {
         console.log(err)
