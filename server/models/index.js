@@ -16,7 +16,7 @@ let sequelize;
 //   sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
 
-sequelize = new Sequelize("postgres://default:iU5VdCm9prav@ep-restless-smoke-284901-pooler.us-east-1.postgres.vercel-storage.com/verceldb", {
+sequelize = new Sequelize("postgres://default:iU5VdCm9prav@ep-restless-smoke-284901-pooler.us-east-1.postgres.vercel-storage.com/verceldb?ssl=true", {
   dialectModule: require('pg')
 });
 
