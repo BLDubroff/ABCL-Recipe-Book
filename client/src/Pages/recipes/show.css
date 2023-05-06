@@ -19,13 +19,11 @@
 }
 
 .cardContainer{
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
-    margin: 20px;
-    display: flex;
-   flex: space-between;
-   padding: 20px;
-   flex-direction: row;
-   flex: wrap;   
+    display: grid;
+    grid-template-columns: 100ch 100ch ;
+    grid-row-end: 3;
+    /* justify-items: center;     */
+    /* width: 100px; */
 }
 
 .container-recipe{

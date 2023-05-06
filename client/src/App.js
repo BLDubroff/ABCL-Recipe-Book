@@ -9,7 +9,7 @@ import LoginSignupPage from "./Components/LoginSignupPage";
 import Home from "./Pages/Home";
 import AddRecipe from "./Pages/recipes/addRecipe";
 import EditRecipe from "./Pages/recipes/editRecipe";
-import ShowRecipe from "./Pages/recipes/showRecipe";
+// import ShowRecipe from "./Pages/recipes/showRecipe";
 import ServerContext from "./Features/ServerContext";
 import RecipePage from "./Pages/recipes/recipePage";
 
@@ -43,7 +43,7 @@ function App() {
 
             <Route path="/addRecipe" element={<AddRecipe />} />
 
-            <Route path="/editRecipe/:recipe_id" element={<EditRecipe />} />
+            <Route  path="/editRecipe/:recipe_id" element={<EditRecipe />} />
 
             <Route path="/recipe/:recipe_id" element={<RecipePage />} />
 

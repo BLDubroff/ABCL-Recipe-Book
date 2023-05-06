@@ -8,3 +8,18 @@ input{
 button:hover{
     background-color: rgb(115, 187, 115);
 }
+
+
+.formContainer{
+/* border: solid 1px; */
+width: 800px;
+/* height: 9px; */
+padding: 20px;
+display: flex;
+/* text-align: center; */
+margin: auto;
+margin-top: 20px;
+justify-content: center;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}

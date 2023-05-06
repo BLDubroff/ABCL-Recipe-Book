@@ -6,7 +6,7 @@ function UserProfile(props) {
   return (
     <h3 className="logBtns">
       <Link className="userName" to="/profile">
-        <Button variant="outline-secondary"> User: {props.username}</Button>
+        <Button variant="outline-secondary">User: <strong>{props.username}</strong> </Button>
       </Link>
       {/* <div style={{ textAlign: "right" }}> */}
       <Button className="addbtn" variant="outline-secondary" href="/addRecipe">
