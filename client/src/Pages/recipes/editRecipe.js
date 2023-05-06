@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ServerContext from "../../Features/ServerContext";
 
@@ -15,6 +15,7 @@ const EditRecipe = () => {
   
   const { serverURL } = useContext(ServerContext);
   const { recipe_id } = useParams();
+  const navigate = useNavigate();
 
   const [recipe_data, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
