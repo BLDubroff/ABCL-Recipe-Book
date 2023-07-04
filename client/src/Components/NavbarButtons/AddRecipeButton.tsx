@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function AddRecipeButton() {
+function AddRecipeButton(): JSX.Element {
     return (
         <h1>
             <Link style={{textDecoration:'none', color: 'black'}} to={'/addRecipe'}>

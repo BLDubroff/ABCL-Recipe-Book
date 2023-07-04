@@ -3,11 +3,21 @@ import { Link } from "react-router-dom";
 import "./show.css";
 import { Card, ListGroup, Row, Col } from "react-bootstrap";
 
-const ShowRecipe = (recipe_data) => {
+interface RecipeData {
+  recipe_id: string;
+  img: string;
+  name: string;
+  title: string;
+  description: string;
+  prep_time_in_minutes: number;
+  cook_time_in_minutes: number;
+  total_time_in_minutes: number;
+  servings: number;
+}
+
+const ShowRecipe: React.FC<RecipeData> = (recipe_data) => {
   return (
     <Row xs={1} md={2} className="g-4">
-      {/* {Array.from({ length: 4 }).map((_, idx) => (
-        <Col key={idx}> */}
       <Card
         className="cardContainer"
         style={{ width: "20rem" }}
@@ -50,8 +60,6 @@ const ShowRecipe = (recipe_data) => {
           </ListGroup>
         </div>
       </Card>
-      {/* </Col>
-       ))} */}
     </Row>
   );
 };

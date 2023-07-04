@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import React from 'react';
 import "./Navbarbuttons.css";
 import Button from 'react-bootstrap/Button';
 
-function LoginButton() {
+function LoginButton(): JSX.Element {
   return (
     <h3>
       <Link to={"/login"}>

@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
 
-function UserProfile(props) {
+interface UserProfileProps {
+    username: string;
+}
+
+function UserProfile(props: UserProfileProps) {
 
     return (
         <h3>

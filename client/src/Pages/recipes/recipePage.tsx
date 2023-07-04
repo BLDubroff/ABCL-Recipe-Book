@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, FC, MouseEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ServerContext from "../../Features/ServerContext";
 import axios from "axios";
@@ -6,13 +6,28 @@ import "./show.css";
 import Button from "react-bootstrap/Button";
 import AccountContext from "../../Features/AccountContext";
 
-const RecipePage = () => {
+interface RecipeData {
+  recipe_id: string;
+  title: string;
+  author: { username: string };
+  img: string;
+  name: string;
+  description: string;
+  recipe_content: string;
+  prep_time_in_minutes: number;
+  cook_time_in_minutes: number;
+  total_time_in_minutes: number;
+  servings: number;
+  user_id: string;
+}
+
+const RecipePage: React.FC = () => {
   const { serverURL } = useContext(ServerContext);
   const { user_id } = useContext(AccountContext);
-  const { recipe_id } = useParams();
+  const { recipe_id } = useParams<{ recipe_id: string }>();
   const navigate = useNavigate();
 
-  const [recipe_data, setRecipe] = useState({});
+  const [recipe_data, setRecipe] = useState<RecipeData>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,10 +38,9 @@ const RecipePage = () => {
       setLoading(false);
     };
     retrieveRecipe();
-  }, []);
+  }, [recipe_id, serverURL]);
 
-  const handleDelete = (e) => {
-
+  const handleDelete = (e: React.MouseEvent) => {
     e.preventDefault();
 
     fetch(`${serverURL}/recipes/${recipe_id}`, {
@@ -60,7 +74,6 @@ const RecipePage = () => {
       </div>
       <div>
         <p>
-          {" "}
           Preparation Time:
           {recipe_data.prep_time_in_minutes}, Cook Time:{" "}
           {recipe_data.cook_time_in_minutes}, Total time:{" "}
@@ -81,9 +94,9 @@ const RecipePage = () => {
                 variant="outline-danger"
                 value="Delete Recipe"
                 onClick={handleDelete} 
-                />
-              </> : 
-              <></>
+              />
+            </> : 
+            <></>
           }
         </div>
       </div>

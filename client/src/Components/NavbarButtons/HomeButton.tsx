@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function HomeButton() {
+function HomeButton(): JSX.Element {
     return (
         <h1>
             <Link style={{textDecoration:'none', color: 'black'}} to={'/'}>
